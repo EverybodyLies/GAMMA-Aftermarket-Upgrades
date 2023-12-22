@@ -12,7 +12,7 @@ If you are able to speak with a mechanic, they will offer their services.
 
 # Installation
 
-Download the latest release from either this page or on the GAMMA Discord, then install it at the bottom of your load order in Mod Organizer 2.
+Download the latest release from either this page, then install it at the bottom of your load order in Mod Organizer 2.
 
 # Upgrades available to each faction
 
