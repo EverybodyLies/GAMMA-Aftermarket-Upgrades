@@ -17,7 +17,7 @@ sks_molot = {
 }
 
 pkm_zulu = {
-	["cost"] = 50000,
+	["cost"] = 150000,
 	["reward"] = "wpn_pkm_zulu",
 	["wpn_pkm"] =  true,
 }
