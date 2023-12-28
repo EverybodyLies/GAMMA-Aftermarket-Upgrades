@@ -104,6 +104,12 @@ function toz34_hunter(first_speaker, second_speaker)
 end 
 
 
+function toz34_bear(first_speaker, second_speaker)
+	local table = aftermarket_exchange_convert.toz34_bear
+	exchange_gun(first_speaker,second_speaker,table)
+end 
+
+
 function m4a1_butcher(first_speaker, second_speaker)
 	local table = aftermarket_exchange_convert.m4a1_butcher
 	exchange_gun(first_speaker,second_speaker,table)

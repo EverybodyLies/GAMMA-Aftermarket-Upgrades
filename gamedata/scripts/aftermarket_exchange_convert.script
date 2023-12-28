@@ -30,6 +30,13 @@ toz34_hunter = {
 	["wpn_toz34_decor"] =  true,
 }
 
+toz34_bear = {
+	["cost"] = 25000,
+	["reward"] = "wpn_bm16_full_alt_23",
+	["wpn_bm16_full"] =  true,
+	["wpn_bm16_full_alt"] =  true,
+}
+
 m4a1_butcher = {
 	["cost"] = 40000,
 	["reward"] = "wpn_m4_butcher",

@@ -180,6 +180,7 @@
 				<next>2</next>
 				<next>3</next>
 				<next>4</next>
+				<next>7</next>
 				<next>5</next>
 				<next>6</next>
 				<next>11</next>
@@ -196,6 +197,10 @@
 			<phrase id="4">
 				<text>aftermarket_toz34_hunter</text>
 				<action>aftermarket_exchange_trade.toz34_hunter</action>
+			</phrase>
+			<phrase id="7">
+				<text>aftermarket_toz34_bear</text>
+				<action>aftermarket_exchange_trade.toz34_bear</action>
 			</phrase>
 			<phrase id="5">
 				<text>aftermarket_ak12_mono1</text>
@@ -316,6 +321,7 @@
 				<next>2</next>
 				<next>3</next>
 				<next>4</next>
+				<next>8</next>
 				<next>5</next>
 				<next>6</next>
 				<next>7</next>
@@ -333,6 +339,10 @@
 			<phrase id="4">
 				<text>aftermarket_toz34_hunter</text>
 				<action>aftermarket_exchange_trade.toz34_hunter</action>
+			</phrase>
+			<phrase id="8">
+				<text>aftermarket_toz34_bear</text>
+				<action>aftermarket_exchange_trade.toz34_bear</action>
 			</phrase>
 			<phrase id="5">
 				<text>aftermarket_ak74m_beard</text>
