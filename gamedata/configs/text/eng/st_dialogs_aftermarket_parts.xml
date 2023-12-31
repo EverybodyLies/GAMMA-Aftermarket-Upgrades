@@ -28,10 +28,10 @@
 		<text>A M4A1 Butcher kit (M4, M4A1, M4A1 Tactical)  [ 40 000 RU ]. </text>
 	</string>
 	<string id="aftermarket_ak74m_beard">
-		<text>An AK-74M kit from Beard (AK-74, AK-74M)  [ 20 000 RU ]. </text>
+		<text>An AK-74M kit from Beard (AK-74, AK-74M)  [ 25 000 RU ]. </text>
 	</string>
 	<string id="aftermarket_ar15_hera">
-		<text>An AR-15 HERA kit (M4, M4A1, M4A1 Tactical, M4A1 Butcher) [ 95 000 RU ]. </text>
+		<text>An AR-15 HERA kit (M4, M4A1, M4A1 Tactical, M4A1 Butcher) [ 125 000 RU ]. </text>
 	</string>
 	<string id="aftermarket_auga3_commando">
 		<text>A Steyr AUG A3 Commando kit (Steyr AUG A3) [ 35 000 RU ]. </text>
@@ -52,13 +52,13 @@
 		<text>An AKS-74U Tactical kit (AK-74U) [ 35 000 RU ]. </text>
 	</string>
 	<string id="aftermarket_ak105_shakal">
-		<text>An AK-105 Shakal kit (Ak-105, AK-74, AK-74M) [ 40 000 RU ]. </text>
+		<text>An AK-105 Shakal kit (Ak-105, AK-74, AK-74M) [ 95 000 RU ]. </text>
 	</string>
 	<string id="aftermarket_ak74_pmc">
-		<text>An AK-74 PMC kit (AK-74, AK-74M, AK-74M Beard) [ 30 000 RU ]. </text>
+		<text>An AK-74 PMC kit (AK-74, AK-74M, AK-74M Beard) [ 35 000 RU ]. </text>
 	</string>
 	<string id="aftermarket_groza_dolg">
-		<text>An OC-14-4A Dolg kit (OC-14-4A) [ 95 000 RU ]. </text>
+		<text>An OC-14-4A Dolg kit (OC-14-4A) [ 125 000 RU ]. </text>
 	</string>
 	<string id="aftermarket_svds_pmc">
 		<text>An SVDS PMC kit (SVDS) [ 90 000 RU ]. </text>
@@ -79,10 +79,10 @@
 		<text>A Saiga-12 kit from Kalashnikov USA (Saiga-12 Nerd, Saiga-12 Dushman) [ 120 000 RU ]. </text>
 	</string>
 	<string id="aftermarket_m4a1_tac">
-		<text>An M4A1 Tactical kit (M4, M4A1) [ 25 000 RU ]. </text>
+		<text>An M4A1 Tactical kit (M4, M4A1) [ 30 000 RU ]. </text>
 	</string>
 	<string id="aftermarket_g36c_merc">
-		<text>A G36C Merc kit (G36, G36K, G36L, G36C) [ 30 000 RU ]. </text>
+		<text>A G36C Merc kit (G36, G36K, G36L, G36C) [ 35 000 RU ]. </text>
 	</string>
 	<string id="aftermarket_vss_merc">
 		<text>A VSS Vintorez Merc kit (VSS, AS Val) [ 40 000 RU ]. </text>
@@ -91,7 +91,7 @@
 		<text>A SCAR-H Operator kit (SCAR-H) [ 45 000 RU ]. </text>
 	</string>
 	<string id="aftermarket_ak5c_isg">
-		<text>An AK 5C ISG kit (AK 5C) [ 40 000 RU ]. </text>
+		<text>An AK 5C ISG kit (AK 5C) [ 45 000 RU ]. </text>
 	</string>
 	<string id="aftermarket_rd47_isg">
 		<text>An RD47 from Rifle Dynamics (AK-104 Alpha) [ 200 000 RU ]. </text>
@@ -106,16 +106,16 @@
 		<text>An RD-74U Tactical from Rifle Dynamics (AKS-74U Tactical) [ 150 000 RU ]. </text>
 	</string>
 	<string id="aftermarket_ak12_mono1">
-		<text>An AK-12 Monolith 1.0 kit (AK-12) [ 30 000 RU ]. </text>
+		<text>An AK-12 Monolith 1.0 kit (AK-12) [ 45 000 RU ]. </text>
 	</string>
 	<string id="aftermarket_ak12_mono2">
-		<text>An AK-12 Monolith 2.0 kit (AK-12) [ 40 000 RU ]. </text>
+		<text>An AK-12 Monolith 2.0 kit (AK-12) [ 85 000 RU ]. </text>
 	</string>
 	<string id="aftermarket_auga1_cqb">
 		<text>A Steyr AUG A1 CQB kit (Steyr AUG A1) [ 25 000 RU ]. </text>
 	</string>
 	<string id="aftermarket_ak105_swamp">
-		<text>An AK-105 Swamp Thing kit (AK-105) [ 40 000 RU ]. </text>
+		<text>An AK-105 Swamp Thing kit (AK-105) [ 95 000 RU ]. </text>
 	</string>
 	<string id="aftermarket_dvl10_sab">
 		<text>A DVL-10 Saboteur conversion kit (DLV-10 Urbana) [ 85 000 RU ]. </text>
