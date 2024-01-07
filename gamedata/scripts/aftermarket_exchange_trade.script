@@ -46,10 +46,12 @@ function degrade_gun(sec, condition)
 	if obj and condition then
 		parts = item_parts.get_parts_con(obj, nil, true)
 		local saved_parts = se_load_var(obj_id, nil, "parts")
-		for i, part in pairs(parts) do
-			parts_table[i] = part
-			parts_table[i] = parts_reward_table[i] or parts_table[i]
-			saved_parts[i] = parts_table[i]
+		if parts then
+			for i, part in pairs(parts) do
+				parts_table[i] = part
+				parts_table[i] = parts_reward_table[i] or parts_table[i]
+				saved_parts[i] = parts_table[i]
+			end
 		end
 		item_parts.set_parts_con(obj_id, saved_parts)
 		obj:set_condition(condition)
