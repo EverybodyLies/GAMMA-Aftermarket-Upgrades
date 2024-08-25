@@ -98,7 +98,7 @@ pp2000_op = {
 sr2m_rail = {
 	["cost"] = 5000,
 	["reward"] = "wpn_sr2_m1",
-	["wpn_sr2_vesk"] =  true,
+	["wpn_sr2_veresk"] =  true,
 }
 
 ak104_alfa = {
