@@ -189,6 +189,10 @@ function svds_pmc(first_speaker, second_speaker)
 	exchange_gun(first_speaker,second_speaker,table)
 end 
 
+function ks23_eco(first_speaker, second_speaker)
+	local table = aftermarket_exchange_convert.ks23_eco
+	exchange_gun(first_speaker,second_speaker,table)
+end 
 
 function saiga12_nerd(first_speaker, second_speaker)
 	local table = aftermarket_exchange_convert.saiga12_nerd
