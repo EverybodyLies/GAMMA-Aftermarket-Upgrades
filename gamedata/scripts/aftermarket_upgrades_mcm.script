@@ -1,0 +1,95 @@
+
+deals_table = "ui_mcm_aftermarket_upgrades_deals_warning"
+
+------------------------------------
+--------- DEFAULT SETTINGS ---------
+------------------------------------
+
+VERSION = 2.2
+
+TOOLKIT_REQUIRED			= true
+TOOLKIT_CONSUME				= true
+MECHANIC_FEE				= 8000
+MECHANIC_FEE_ENABLED		= true
+MAGS_ENABLED				= true
+BONUS_ITEMS_ENABLED			= true
+
+COST_MODE					= 1
+COST_MODIFIER_MONEY			= 1.5
+COST_MODIFIER_KITS			= 1.2
+COST_TYPE_A					= 1.0
+COST_TYPE_B					= 1.5
+COST_TYPE_C					= 2.0
+COST_TYPE_D					= 2.5
+
+DEBUG_LOG					= false
+
+------------------------------------
+
+function get_config(key)
+	if ui_mcm then return ui_mcm.get("aftermarket_upgrades/" .. key) end
+end
+
+function on_mcm_load()
+t = {id = "aftermarket_upgrades", gr = {
+
+		{id = "settings", text = "ui_mcm_aftermarket_upgrades_tab_settings", sh = true, gr = {
+			{id = "title", type = "slide", link = "ui_options_slider_gameplay_diff", text = "ui_mcm_aftermarket_upgrades_settings_title", size = {512,50}, spacing = 20},
+			{id = "descr", type = "desc", text = "ui_mcm_aftermarket_upgrades_settings_descr"},
+
+			{id = "line", type = "line"},
+
+			{id = "toolkit_title",	  type = "desc", text = "ui_mcm_aftermarket_upgrades_toolkit_title", clr = {200,200,255,200}},
+			{id = "toolkit_required", type = "check", val = 1, def = TOOLKIT_REQUIRED},
+			{id = "toolkit_consume",  type = "check", val = 1, def = TOOLKIT_CONSUME},
+
+			{id = "mechanic_fee_title",   type = "desc", text = "ui_mcm_aftermarket_upgrades_mechanic_fee_title", clr = {200,200,255,200}},
+			{id = "mechanic_fee",         type = "track", val = 2, min = 500, max = 30000, step = 500, def = MECHANIC_FEE},
+			{id = "mechanic_fee_enabled", type = "check", val = 1, def = MECHANIC_FEE_ENABLED},
+
+			{id = "bonus_items_title",   type = "desc", text = "ui_mcm_aftermarket_upgrades_bonus_items_title", clr = {200,200,255,200}},
+			{id = "bonus_items_enabled", type = "check", val = 1, def = BONUS_ITEMS_ENABLED},
+
+			{id = "mags_title",   type = "desc", text = "ui_mcm_aftermarket_upgrades_mags_title", clr = {200,200,255,200}},
+			{id = "mags_enabled", type = "check", val = 1, def = MAGS_ENABLED},
+
+			{id = "line", type = "line"},
+
+			{id = "cost_title", type = "desc", text = "ui_mcm_aftermarket_upgrades_cost_title", clr = {200,200,255,200}},
+			{id = "cost_mode",  type = "radio_v", val = 2, def = COST_MODE, content = {{0, "aftermarket_cost_by_modifier"}, {1, "aftermarket_cost_by_repair_type"} }},
+
+			{id = "cost_modifier_title", type = "desc", text = "ui_mcm_aftermarket_upgrades_cost_modifier_title", clr = {200,200,255,200}},
+			{id = "cost_modifier_money", type = "track", val = 2, min = 0.5, max = 5.0, step = 0.05, def = COST_MODIFIER_MONEY},
+			{id = "cost_modifier_kits",  type = "track", val = 2, min = 0.5, max = 5.0, step = 0.05, def = COST_MODIFIER_KITS},
+
+			{id = "cost_repair_type_title", type = "desc", text = "ui_mcm_aftermarket_upgrades_cost_repair_type_title", clr = {200,200,255,200}},
+			{id = "cost_type_a", type = "track", val = 2, min = 0.5, max = 5.0, step = 0.05, def = COST_TYPE_A},
+			{id = "cost_type_b", type = "track", val = 2, min = 0.5, max = 5.0, step = 0.05, def = COST_TYPE_B},
+			{id = "cost_type_c", type = "track", val = 2, min = 0.5, max = 5.0, step = 0.05, def = COST_TYPE_C},
+			{id = "cost_type_d", type = "track", val = 2, min = 0.5, max = 5.0, step = 0.05, def = COST_TYPE_D},
+
+			{id = "empty", type = "desc", text = " "},
+		}},
+
+		{id = "debug", text = "ui_mcm_aftermarket_upgrades_tab_debug", sh = true, gr = {
+			{id = "title", type = "slide", link = "ui_options_slider_gameplay_diff", text = "ui_mcm_aftermarket_upgrades_debug_title", size = {512,50}, spacing = 20},
+			{id = "to_log", type = "check", val = 1, def = DEBUG_LOG, clr = {255,255,255,255}},
+
+			{id = "line", type = "line"},
+
+			{id = "deals_title", type = "desc", text = "ui_mcm_aftermarket_upgrades_deals_title", clr = {200,200,255,200}},
+			{id = "deals", type = "desc", text = deals_table},
+		}},
+	--[[
+		{id = "tutorial", text = "ui_mcm_aftermarket_upgrades_tab_tutorial", sh = true, gr = {
+			{id = "title", type = "slide", link = "ui_options_slider_gameplay_diff", text = "ui_mcm_aftermarket_upgrades_tutorial_title", size = {512,50}, spacing = 20},
+			{id = "descr", type = "desc", text = "ui_mcm_aftermarket_upgrades_tutorial_descr"},
+
+			{id = "empty", type = "desc", text = " "},
+		}}
+	--]]
+	}}
+
+	return t
+end
+

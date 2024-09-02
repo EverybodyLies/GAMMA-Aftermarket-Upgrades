@@ -1,0 +1,914 @@
+
+-- Big thanks to Grok and Darkasleif for essentially letting me defile their code for my own purposes
+-- Also double thanks to Darkasleif for providing help with getting this mess to work
+-- Made by Cosmic Echoes
+
+-- Changes made by EverybodyLies:
+-- 1.7.1:
+-- Mod now fully translated to russian.
+-- Cost now colored in orange.
+-- 2.0:
+-- [DONE] Functor names renamed everywhere to copy guns section names (without wpn_ prefix) for avoiding confusion.
+-- [DONE] Dialog now includes list of available exchanges (hardwritten in text xml for now).
+-- [DONE] Dialog now has preconditions to not show anavailable gun trades (no gun for exchange or not enough money).
+-- [DONE] Dialog now has dynamic prices and discounts (hardcoded for now).
+-- [DONE] Dialog now has dynamic list of required guns, with option to show/hide them (for less text bloat).
+-- [DONE] Make list of available exchanges dynamic by redoing exchange entries, creating traders sections.
+-- [DONE] Make dialog xml contain 20 lines of script-filled exchange positions, sourcing from traders exchange list.
+-- [DONE] Make order of available exchanges as-is sorted in config (defined by user, not an automatic ass-sorted table).
+-- [DONE] Dialog response for no available exchanges.
+-- [DONE] Add options for mags support (2 default mags comes with the gun).
+-- 2.0.6:
+-- [DONE] Cost customization: mechanic fee, cost of parts for upgrade / specified money amount, general multipliers for all of this.
+-- [DONE] Dialog now includes additional responses and option to change your mind.
+-- [DONE] Add options for mags support (2 default mags comes with the gun).
+-- [DONE] Added ability to have bonus items on a deal (you can give addons to player, for example).
+-- [DONE] Hide exchange if target gun section doesn't exist (typos crash fix and basically adds support for custom weapon trades to be included).
+-- [DONE] Customize costs in config for every entry.
+-- 2.1:
+-- [DONE] Require toolkit use for upgrade.
+-- [DONE] Get to choose which weapon we use for exchange.
+-- [DONE] Add debug functions to print weapon tables to log file (sections or translated versions).
+-- [DONE] Finish recipes for all G.A.M.M.A. weapons.
+-- [DONE] Fix english translation.
+-- 2.2:
+-- [DONE] Recheck error handling (after altering all of this dialogs, need to be sure) - debug function is debugged now.
+-- [DONE] Add MCM menu.
+-- [DONE] Add options for cost customization
+-- [DONE] Add cost modifiers for each repair tier of the gun.
+-- [DONE] Add bonus mags settings.
+-- [DONE] Add bonus items settings.
+
+-- TODO: Add options for customizable ammo amount coming with the gun (cost included / for free). / but there is already bonus items.
+-- TODO: Add ability to exchange guns not only for money, but items too.
+-- TODO: Custom-translated entry strings instead of weapon inv_name ("PKM like Zulus had", for example)
+-- TODO: Add rate limits to exchanges and bound them to restock timer?
+
+
+local MAX_EXCHANGES = 30 -- limited in xml dialog tree
+local COST_MODE_MULTIPLY = 0
+local COST_MODE_TYPE = 1
+
+local gt = game.translate_string
+local get_name = ui_item.get_sec_name
+local clr_o = utils_xml.get_color("d_orange")
+local clr_r = utils_xml.get_color("d_red")
+local clr_off = "%c[default]" -- "%c[255,200,200,200]"
+
+local get_config = aftermarket_upgrades_mcm.get_config
+local all_traders = aftermarket_upgrades_trades.exchanges
+local all_guns = aftermarket_upgrades_trades.guns
+local exchanges_count = {}
+local parts_reward_table = {}
+local selected_gun_table = {}
+local actor_exchange_table = {}
+local gun_to_exchange = nil
+
+local toolkit_required				= get_config("settings/toolkit_required")
+local toolkit_consume				= get_config("settings/toolkit_consume")
+local mechanic_fee					= get_config("settings/mechanic_fee")
+local mechanic_fee_enabled			= get_config("settings/mechanic_fee_enabled")
+local bonus_items_enabled			= get_config("settings/bonus_items_enabled")
+local mags_enabled					= get_config("settings/mags_enabled")
+
+local cost_mode						= get_config("settings/cost_mode")
+local cost_modifier_money			= get_config("settings/cost_modifier_money")
+local cost_modifier_kits			= get_config("settings/cost_modifier_kits")
+local cost_type_a					= get_config("settings/cost_type_a")
+local cost_type_b					= get_config("settings/cost_type_b")
+local cost_type_c					= get_config("settings/cost_type_c")
+local cost_type_d					= get_config("settings/cost_type_d")
+
+local debug_to_log					= get_config("debug/to_log")
+local all_deals = ""
+
+--[[
+		UTILITY
+--]]
+
+
+function actor_has_gun(gun_table)
+	if IsWeapon(gun_to_exchange) and (not IsMelee(gun_to_exchange)) then
+		local parts_condition = item_parts.get_parts_con(gun_to_exchange)
+		parts_reward_table = {}
+		for i, value in pairs(parts_condition) do
+			parts_reward_table[i] = value
+		end
+	end
+
+	return gun_to_exchange:section(), gun_to_exchange:condition()
+end
+
+
+function degrade_gun(sec, condition)
+	local parts = nil
+	local parts_table = {}
+
+	obj = db.actor:object(sec)
+	local obj_id = obj:id()
+	local obj_sec = obj:section()
+	
+	if obj and condition then
+		parts = item_parts.get_parts_con(obj, nil, true)
+		local saved_parts = se_load_var(obj_id, nil, "parts")
+		if parts then
+			for i, part in pairs(parts) do
+				parts_table[i] = part
+				parts_table[i] = parts_reward_table[i] or parts_table[i]
+				saved_parts[i] = parts_table[i]
+			end
+		end
+		item_parts.set_parts_con(obj_id, saved_parts)
+		obj:set_condition(condition)
+	end
+	return true
+end
+
+
+function exchange_gun(first_speaker, second_speaker)
+	local sec = selected_gun_table["exchange_section"]
+	local cost = selected_gun_table["exchange_cost_weapon"]
+	local toolkit = selected_gun_table["exchange_toolkit"]
+	local mags = selected_gun_table["exchange_bonus_mags"] or (2 and mags_enabled)
+
+	gun_to_remove, reward_condition = actor_has_gun(selected_gun_table)
+	if gun_to_remove and db.actor:money() >= cost then
+
+		-- IF TOOLKIT IS USED
+		if toolkit and toolkit_required and toolkit_consume then
+			local avail = mlr_utils.have_item(toolkit, 1)
+			if avail then
+				dialogs.relocate_item_section_from_actor(first_speaker, second_speaker, toolkit)
+			end
+		end
+
+		-- TAKING AWAY GUN AND MONEY FOR UPGRADE PARTS COST
+		dialogs.relocate_item_section_from_actor(first_speaker, second_speaker, gun_to_remove)
+		dialogs.relocate_money_from_actor(first_speaker, second_speaker, cost)
+
+		-- TAKING MONEY FOR DOING THE WORK
+		if mechanic_fee_enabled and mechanic_fee > 0 then
+			dialogs.relocate_money_from_actor(first_speaker, second_speaker, mechanic_fee)
+		end
+
+		-- GETTING YOUR NEW GUN
+		dialogs.relocate_item_section_to_actor(first_speaker, second_speaker, sec)
+
+		-- GETTING BONUS ITEMS
+		if bonus_items_enabled then
+			for bonus_item, amount in utils_data.pairsByKeys(selected_gun_table) do
+				if string.find(bonus_item, "exchange_bonus_item_") == 1 and amount > 0 then
+					dialogs.relocate_item_section_to_actor(first_speaker, second_speaker, string.sub(bonus_item, string.len("exchange_bonus_item_") + 1), amount)
+				end
+			end
+		end
+
+		-- GETTING ADDITIONAL MAGS
+		if mags > 0 and mags_enabled then
+			if magazines and magazine_binder and magazine_binder.is_supported_weapon(sec) then
+				local default_mag = magazine_binder.weapon_default_magazine(sec)
+				if default_mag then
+				--	printf("- degrade_gun | adding %s additional mags [%s]", mags, default_mag)
+					dialogs.relocate_item_section_to_actor(first_speaker, second_speaker, default_mag, mags)
+				else
+				--	printf("- degrade_gun | default_mag for %s is nil", obj_sec)
+				end
+			end
+		end
+	
+		-- DOWNGRADING THE GUN PARTS
+		demonized_time_events.CreateTimeEvent("aftermarket_upgrades_trade", "aftermarket_upgrades_trade_degrade_gun", 0.25, degrade_gun, sec, reward_condition)
+	else
+		printf("- aftermarket_unpgrades | Exchange denied! Weapon choosed for exchange or money was lost somehow!")
+	end
+end
+
+
+--[[
+		EXCHANGE DIALOG UTILITY
+--]]
+
+
+function get_exchange_cost(gun_table)
+	local sec = gun_table["exchange_section"] or "exchange_section_not_found"
+	local value = gun_table["exchange_cost"]
+	local repair_type = ini_sys:r_string_ex(sec, "repair_type")
+
+	local cost_result = math.floor(ini_sys:r_float_ex(sec, "cost") or 1000)
+	local cost_repair_type = 1
+
+	if repair_type == "pistol" then
+		cost_repair_type = cost_type_a
+	elseif repair_type == "shotgun" then
+		cost_repair_type = cost_type_b
+	elseif repair_type == "rifle_5" then
+		cost_repair_type = cost_type_c
+	else
+		cost_repair_type = cost_type_d
+	end
+
+	if not value then -- cost is not specified
+		if cost_mode == COST_MODE_TYPE then
+			return cost_result * cost_repair_type
+		else
+			return cost_result * cost_modifier_money
+		end
+	end
+
+	if tonumber(value) and value > 0 then
+	--  it's a number
+		cost_result = value
+
+		if cost_mode == COST_MODE_TYPE then
+			return cost_result * cost_repair_type
+		else -- COST_MODE_MULTIPLY
+			return cost_result * cost_modifier_money
+		end
+	else
+	--  it's a section or a config line is messed up
+		if cost_mode == COST_MODE_TYPE then
+			if ini_sys:section_exist(value) then
+				return math.floor(ini_sys:r_float_ex(value, "cost")) * cost_repair_type or 1000
+			else
+				return cost_result * cost_repair_type
+			end
+		else -- COST_MODE_MULTIPLY
+			if ini_sys:section_exist(value) then
+				return math.floor(ini_sys:r_float_ex(value, "cost")) * cost_modifier_kits or 1000
+			else
+				return cost_result * cost_modifier_money or 1000
+			end
+		end
+	end
+end
+
+
+function get_exchange_str(gun_table, no_cost)
+	if not gun_table then return "exchange_none" end
+
+	local sec = gun_table["exchange_section"] or "exchange_section_not_found"
+	local cost = get_exchange_cost(gun_table)
+	local cost_total = cost
+	local toolkit = get_toolkit(sec)
+	local required_guns = ""
+	local index = 0
+
+	if not mechanic_fee_enabled then mechanic_fee = 0 end
+	cost_total = cost_total + mechanic_fee
+
+	selected_gun_table = gun_table
+	selected_gun_table["exchange_toolkit"] = toolkit
+	selected_gun_table["exchange_cost_weapon"] = cost
+	selected_gun_table["exchange_cost_total"] = cost_total
+
+--	printf("- aftermarket_unpgrades | gun [%s] is selected", sec)
+
+	local state = 0
+	-- 0 = actor have everything he needs to, we can exchange
+	-- 1 = actor don't have enough money
+	-- 2 = actor don't have required toolkit
+	-- 3 = state for debug table request
+
+	if db.actor:money() < cost then
+		state = 1
+	end
+
+	if toolkit and toolkit_required then
+		local avail = mlr_utils.have_item(toolkit, 1)
+		if not avail then
+			state = 2
+		end
+	end
+
+	selected_gun_table["exchange_state"] = state
+	actor_exchange_table = {}
+
+	for k, v in utils_data.pairsByKeys(gun_table) do
+		if ini_sys:section_exist(k) then
+			if v then
+				required_guns = required_guns .. get_name(k) .. ", "
+			end
+
+			if mlr_utils.have_item(k, 1) then
+				index = index + 1
+				actor_exchange_table[index] = db.actor:object(k)
+			--	printf("- aftermarket_unpgrades | actor_exchange_table[%s] = %s", index, k)
+			end
+		end
+	end
+
+	if string.len(required_guns) > 0 then
+		required_guns = string.sub(required_guns, 1, string.len(required_guns) - 2) -- removing extra comma
+	else
+		return "ERROR! Entry for [" .. sec .. "] has no valid guns to exchange (that is shown to the player)!"
+	end
+
+	if no_cost then state = 3 end
+
+	if ini_sys:section_exist(sec) then
+		if state > 0 then
+			return get_name(sec) .. " (" .. gt("aftermarket_upgrades_word_from") .. " " .. required_guns .. ")"
+		else
+			return get_name(sec) .. " (" .. gt("aftermarket_upgrades_word_from") .. " " .. required_guns .. ")" .. clr_o .. " [" .. cost_total .. " RU]"
+		end
+	else -- for debug table
+		return sec .. " (" .. gt("aftermarket_upgrades_word_from") .. " " .. required_guns .. ")" .. clr_o .. " [" .. cost_total .. " RU]"
+	end
+end
+
+
+function get_toolkit(sec)
+	local repair_type = ini_sys:r_string_ex(sec, "repair_type")
+	for kit, value in pairs(GetItemList("workshop")) do
+		if value[repair_type] then
+			return kit
+		end
+	end
+end
+
+
+function get_gun_sec_from_speaker(first_speaker, second_speaker, line)
+	local trader_sec = first_speaker:section()
+	local trader_table = all_traders[trader_sec]
+--	printf("- get_gun_sec_from_speaker   | looking at all_traders[%s] = %s for line %s", trader_sec, trader_table, line)
+
+	if trader_sec == "actor" then
+		trader_sec = second_speaker:section()
+		trader_table = all_traders[trader_sec]
+	--	printf("- get_gun_sec_from_speaker   | actor input at line %s, switching to second_speaker = %s", line, trader_sec)
+	end
+
+	if not trader_table then
+		return "ERROR! Trader exchange profile for [" .. trader_sec .. "] is not found!"
+	end
+
+	local index = 0
+	for trader_sort, trader_gun in utils_data.pairsByKeys(trader_table) do
+		index = index + 1
+		if index == line then
+			return trader_gun
+		end
+	end
+
+--	printf("- get_gun_sec_from_speaker   | exchange for line %s is empty", line)
+	return "exchange_line_empty"
+end
+
+
+function get_gun_table_from_speaker(first_speaker, second_speaker, line)
+	return all_guns[get_gun_sec_from_speaker(first_speaker, second_speaker, line)]
+end
+
+
+--[[
+		DIALOGS
+--]]
+
+
+function exchange_dialog(first_speaker, second_speaker)
+	local str_list = ""
+	local trader_sec = first_speaker:section()
+	local trader_table = all_traders[trader_sec]
+
+	if not trader_table then
+		return "ERROR! Trader exchange profile for [" .. trader_sec .. "] is not found!"
+	end
+
+	exchanges_count[trader_sec] = 0 -- for a different responses from actor
+
+	for trader_sort, trader_gun in utils_data.pairsByKeys(trader_table) do
+		local gun_table = all_guns[trader_gun]
+		
+		if not gun_table then
+			return "ERROR! Weapon exchange profile for [" .. trader_gun .. "] is not found!"
+		end
+
+		if exchanges_count[trader_sec] == MAX_EXCHANGES then break end
+
+		local sec = gun_table["exchange_section"] or "exchange_section_not_found"
+		local cost = get_exchange_cost(gun_table)
+		local enabled = gun_table["exchange_enabled"] and ini_sys:section_exist(sec)
+		local required_guns = ""
+
+		if enabled then
+			for gun_key, gun_value in utils_data.pairsByKeys(gun_table) do
+				if ini_sys:section_exist(gun_key) and gun_value then
+					required_guns = required_guns .. get_name(gun_key) .. ", "
+				end
+			end
+
+			if string.len(required_guns) > 0 then
+				required_guns = string.sub(required_guns, 1, string.len(required_guns) - 2) -- removing extra comma
+			else
+				return "ERROR! Entry for [" .. sec .. "] has no valid guns to exchange (that is shown to player)!"
+			end
+
+			str_list = str_list .. " - " .. get_name(sec) .. " (" .. gt("aftermarket_upgrades_word_from") .. " " ..  required_guns .. ") "
+				.. gt("aftermarket_upgrades_word_for") .. " " .. cost .. " RU\\n"
+			exchanges_count[trader_sec] = exchanges_count[trader_sec] + 1
+		end
+	end
+
+	local dialog_end = "."
+	if toolkit_required then dialog_end = gt("aftermarket_upgrades_dialog_bottom_toolkit") end
+
+	if not mechanic_fee_enabled then mechanic_fee = 0 end
+
+	if exchanges_count[trader_sec] > 0 then
+		if mechanic_fee > 0 then
+			return gt("aftermarket_upgrades_dialog_top") .. " \\n \\n" .. str_list .. "\\n \\n" .. gt("aftermarket_upgrades_dialog_bottom") .. " "
+				.. mechanic_fee .. " RU" .. dialog_end
+		else
+			return gt("aftermarket_upgrades_dialog_top") .. " \\n \\n" .. str_list .. "\\n \\n" .. gt("aftermarket_upgrades_dialog_bottom_for_free") .. dialog_end
+		end
+	else
+		return gt("aftermarket_upgrades_dialog_denied")
+	end
+end
+
+
+function exchange_dialog_exit(first_speaker, second_speaker)
+	local trader_sec = first_speaker:section()
+	if trader_sec == "actor" then trader_sec = second_speaker:section()	end
+
+	if not exchanges_count[trader_sec] then
+		return gt("aftermarket_upgrades_exit_error") -- if trader profile is broken
+	end 
+
+	if exchanges_count[trader_sec] > 0 then
+	--	return gt("aftermarket_upgrades_exit_later")
+		return gt("aftermarket_upgrades_exit_no_gun")
+	else
+		return gt("aftermarket_upgrades_exit_getoutofhere")
+	end
+end
+
+
+function show_exchange(gun_table)
+	if not gun_table then return false end
+
+	local sec = gun_table["exchange_section"] or "exchange_section_not_found"
+	if not mechanic_fee_enabled then mechanic_fee = 0 end
+	local cost = get_exchange_cost(gun_table) + mechanic_fee
+	local enabled = gun_table["exchange_enabled"] and ini_sys:section_exist(sec)
+
+	-- Only checking for player have a gun for exchange
+	if enabled then
+		for k, v in pairs(gun_table) do
+			local avail = mlr_utils.have_item(k, 1)
+			if avail then 
+				return true
+			end
+		end
+	end
+
+	return false
+end
+
+
+function exchange_allowed(line)
+	if actor_exchange_table[line] and selected_gun_table["exchange_state"] == 0 then
+		return true
+	end
+	return false
+end
+
+
+function exchange_dialog_disagree(first_speaker, second_speaker)
+	local state = selected_gun_table["exchange_state"]
+
+	-- 0 = actor have everything he needs to, we can exchange
+	-- 1 = actor don't have enough money
+	-- 2 = actor don't have required toolkit
+	-- 3 = state for debug table request
+
+	if state == 2 then
+		return gt("aftermarket_upgrades_dialog_exchange_no_toolkit") .. " " .. clr_off .. gt("aftermarket_upgrades_word_required_1")
+			.. get_name(selected_gun_table["exchange_toolkit"]) .. gt("aftermarket_upgrades_word_required_2")
+	elseif state == 1 then
+		return gt("aftermarket_upgrades_dialog_exchange_no_money") .. " (" .. get_name(selected_gun_table["exchange_cost_total"]) .. ")."
+	end
+
+	return gt("aftermarket_upgrades_dialog_exchange_disagree")
+end
+
+
+function st_actor_gun(line)
+	local weapon = actor_exchange_table[line]
+
+	if weapon then
+		gun_to_exchange = weapon
+	--	printf("- aftermarket_unpgrades | gun_to_exchange is set to [%s]", get_name(weapon:section()) .. " (" .. math.ceil(weapon:condition() * 100) .. "%)")
+		return get_name(weapon:section()) .. " (" .. math.ceil(weapon:condition() * 100) .. "%)"
+	else
+		return "exchange_gun_none"
+	end
+end
+
+-------------------------------------------------------------
+
+function st_actor_gun_1(first_speaker, second_speaker)
+	return st_actor_gun(1)
+end
+function actor_have_gun_1(first_speaker, second_speaker)
+	return exchange_allowed(1)
+end
+
+
+function st_actor_gun_2(first_speaker, second_speaker)
+	return st_actor_gun(2)
+end
+function actor_have_gun_2(first_speaker, second_speaker)
+	return exchange_allowed(2)
+end
+
+
+function st_actor_gun_3(first_speaker, second_speaker)
+	return st_actor_gun(3)
+end
+function actor_have_gun_3(first_speaker, second_speaker)
+	return exchange_allowed(3)
+end
+
+
+function st_actor_gun_4(first_speaker, second_speaker)
+	return st_actor_gun(4)
+end
+function actor_have_gun_4(first_speaker, second_speaker)
+	return exchange_allowed(4)
+end
+
+
+function st_actor_gun_5(first_speaker, second_speaker)
+	return st_actor_gun(5)
+end
+function actor_have_gun_5(first_speaker, second_speaker)
+	return exchange_allowed(5)
+end
+
+-------------------------------------------------------------
+
+function st_exchange_line_1(first_speaker, second_speaker)
+	return get_exchange_str(get_gun_table_from_speaker(first_speaker, second_speaker, 1))
+end
+function show_exchange_line_1(first_speaker, second_speaker)
+	return show_exchange(get_gun_table_from_speaker(first_speaker, second_speaker, 1))
+end
+
+
+function st_exchange_line_2(first_speaker, second_speaker)
+	return get_exchange_str(get_gun_table_from_speaker(first_speaker, second_speaker, 2))
+end
+function show_exchange_line_2(first_speaker, second_speaker)
+	return show_exchange(get_gun_table_from_speaker(first_speaker, second_speaker, 2))
+end
+
+
+function st_exchange_line_3(first_speaker, second_speaker)
+	return get_exchange_str(get_gun_table_from_speaker(first_speaker, second_speaker, 3))
+end
+function show_exchange_line_3(first_speaker, second_speaker)
+	return show_exchange(get_gun_table_from_speaker(first_speaker, second_speaker, 3))
+end
+
+
+function st_exchange_line_4(first_speaker, second_speaker)
+	return get_exchange_str(get_gun_table_from_speaker(first_speaker, second_speaker, 4))
+end
+function show_exchange_line_4(first_speaker, second_speaker)
+	return show_exchange(get_gun_table_from_speaker(first_speaker, second_speaker, 4))
+end
+
+
+function st_exchange_line_5(first_speaker, second_speaker)
+	return get_exchange_str(get_gun_table_from_speaker(first_speaker, second_speaker, 5))
+end
+function show_exchange_line_5(first_speaker, second_speaker)
+	return show_exchange(get_gun_table_from_speaker(first_speaker, second_speaker, 5))
+end
+
+
+function st_exchange_line_6(first_speaker, second_speaker)
+	return get_exchange_str(get_gun_table_from_speaker(first_speaker, second_speaker, 6))
+end
+function show_exchange_line_6(first_speaker, second_speaker)
+	return show_exchange(get_gun_table_from_speaker(first_speaker, second_speaker, 6))
+end
+
+
+function st_exchange_line_7(first_speaker, second_speaker)
+	return get_exchange_str(get_gun_table_from_speaker(first_speaker, second_speaker, 7))
+end
+function show_exchange_line_7(first_speaker, second_speaker)
+	return show_exchange(get_gun_table_from_speaker(first_speaker, second_speaker, 7))
+end
+
+
+function st_exchange_line_8(first_speaker, second_speaker)
+	return get_exchange_str(get_gun_table_from_speaker(first_speaker, second_speaker, 8))
+end
+function show_exchange_line_8(first_speaker, second_speaker)
+	return show_exchange(get_gun_table_from_speaker(first_speaker, second_speaker, 8))
+end
+
+
+function st_exchange_line_9(first_speaker, second_speaker)
+	return get_exchange_str(get_gun_table_from_speaker(first_speaker, second_speaker, 9))
+end
+function show_exchange_line_9(first_speaker, second_speaker)
+	return show_exchange(get_gun_table_from_speaker(first_speaker, second_speaker, 9))
+end
+
+function st_exchange_line_10(first_speaker, second_speaker)
+	return get_exchange_str(get_gun_table_from_speaker(first_speaker, second_speaker, 10))
+end
+function show_exchange_line_10(first_speaker, second_speaker)
+	return show_exchange(get_gun_table_from_speaker(first_speaker, second_speaker, 10))
+end
+
+
+function st_exchange_line_11(first_speaker, second_speaker)
+	return get_exchange_str(get_gun_table_from_speaker(first_speaker, second_speaker, 11))
+end
+function show_exchange_line_11(first_speaker, second_speaker)
+	return show_exchange(get_gun_table_from_speaker(first_speaker, second_speaker, 11))
+end
+
+
+function st_exchange_line_12(first_speaker, second_speaker)
+	return get_exchange_str(get_gun_table_from_speaker(first_speaker, second_speaker, 12))
+end
+function show_exchange_line_12(first_speaker, second_speaker)
+	return show_exchange(get_gun_table_from_speaker(first_speaker, second_speaker, 12))
+end
+
+
+function st_exchange_line_13(first_speaker, second_speaker)
+	return get_exchange_str(get_gun_table_from_speaker(first_speaker, second_speaker, 13))
+end
+function show_exchange_line_13(first_speaker, second_speaker)
+	return show_exchange(get_gun_table_from_speaker(first_speaker, second_speaker, 13))
+end
+
+
+function st_exchange_line_14(first_speaker, second_speaker)
+	return get_exchange_str(get_gun_table_from_speaker(first_speaker, second_speaker, 14))
+end
+function show_exchange_line_14(first_speaker, second_speaker)
+	return show_exchange(get_gun_table_from_speaker(first_speaker, second_speaker, 14))
+end
+
+
+function st_exchange_line_15(first_speaker, second_speaker)
+	return get_exchange_str(get_gun_table_from_speaker(first_speaker, second_speaker, 15))
+end
+function show_exchange_line_15(first_speaker, second_speaker)
+	return show_exchange(get_gun_table_from_speaker(first_speaker, second_speaker, 15))
+end
+
+
+function st_exchange_line_16(first_speaker, second_speaker)
+	return get_exchange_str(get_gun_table_from_speaker(first_speaker, second_speaker, 16))
+end
+function show_exchange_line_16(first_speaker, second_speaker)
+	return show_exchange(get_gun_table_from_speaker(first_speaker, second_speaker, 16))
+end
+
+
+function st_exchange_line_17(first_speaker, second_speaker)
+	return get_exchange_str(get_gun_table_from_speaker(first_speaker, second_speaker, 17))
+end
+function show_exchange_line_17(first_speaker, second_speaker)
+	return show_exchange(get_gun_table_from_speaker(first_speaker, second_speaker, 17))
+end
+
+
+function st_exchange_line_18(first_speaker, second_speaker)
+	return get_exchange_str(get_gun_table_from_speaker(first_speaker, second_speaker, 18))
+end
+function show_exchange_line_18(first_speaker, second_speaker)
+	return show_exchange(get_gun_table_from_speaker(first_speaker, second_speaker, 18))
+end
+
+
+function st_exchange_line_19(first_speaker, second_speaker)
+	return get_exchange_str(get_gun_table_from_speaker(first_speaker, second_speaker, 19))
+end
+function show_exchange_line_19(first_speaker, second_speaker)
+	return show_exchange(get_gun_table_from_speaker(first_speaker, second_speaker, 19))
+end
+
+
+function st_exchange_line_20(first_speaker, second_speaker)
+	return get_exchange_str(get_gun_table_from_speaker(first_speaker, second_speaker, 20))
+end
+function show_exchange_line_20(first_speaker, second_speaker)
+	return show_exchange(get_gun_table_from_speaker(first_speaker, second_speaker, 20))
+end
+
+
+function st_exchange_line_21(first_speaker, second_speaker)
+	return get_exchange_str(get_gun_table_from_speaker(first_speaker, second_speaker, 21))
+end
+function show_exchange_line_21(first_speaker, second_speaker)
+	return show_exchange(get_gun_table_from_speaker(first_speaker, second_speaker, 21))
+end
+
+
+function st_exchange_line_22(first_speaker, second_speaker)
+	return get_exchange_str(get_gun_table_from_speaker(first_speaker, second_speaker, 22))
+end
+function show_exchange_line_22(first_speaker, second_speaker)
+	return show_exchange(get_gun_table_from_speaker(first_speaker, second_speaker, 22))
+end
+
+
+function st_exchange_line_23(first_speaker, second_speaker)
+	return get_exchange_str(get_gun_table_from_speaker(first_speaker, second_speaker, 23))
+end
+function show_exchange_line_23(first_speaker, second_speaker)
+	return show_exchange(get_gun_table_from_speaker(first_speaker, second_speaker, 23))
+end
+
+
+function st_exchange_line_24(first_speaker, second_speaker)
+	return get_exchange_str(get_gun_table_from_speaker(first_speaker, second_speaker, 24))
+end
+function show_exchange_line_24(first_speaker, second_speaker)
+	return show_exchange(get_gun_table_from_speaker(first_speaker, second_speaker, 24))
+end
+
+
+function st_exchange_line_25(first_speaker, second_speaker)
+	return get_exchange_str(get_gun_table_from_speaker(first_speaker, second_speaker, 25))
+end
+function show_exchange_line_25(first_speaker, second_speaker)
+	return show_exchange(get_gun_table_from_speaker(first_speaker, second_speaker, 25))
+end
+
+
+function st_exchange_line_26(first_speaker, second_speaker)
+	return get_exchange_str(get_gun_table_from_speaker(first_speaker, second_speaker, 26))
+end
+function show_exchange_line_26(first_speaker, second_speaker)
+	return show_exchange(get_gun_table_from_speaker(first_speaker, second_speaker, 26))
+end
+
+
+function st_exchange_line_27(first_speaker, second_speaker)
+	return get_exchange_str(get_gun_table_from_speaker(first_speaker, second_speaker, 27))
+end
+function show_exchange_line_27(first_speaker, second_speaker)
+	return show_exchange(get_gun_table_from_speaker(first_speaker, second_speaker, 27))
+end
+
+
+function st_exchange_line_28(first_speaker, second_speaker)
+	return get_exchange_str(get_gun_table_from_speaker(first_speaker, second_speaker, 28))
+end
+function show_exchange_line_28(first_speaker, second_speaker)
+	return show_exchange(get_gun_table_from_speaker(first_speaker, second_speaker, 28))
+end
+
+
+function st_exchange_line_29(first_speaker, second_speaker)
+	return get_exchange_str(get_gun_table_from_speaker(first_speaker, second_speaker, 29))
+end
+function show_exchange_line_29(first_speaker, second_speaker)
+	return show_exchange(get_gun_table_from_speaker(first_speaker, second_speaker, 29))
+end
+
+
+function st_exchange_line_30(first_speaker, second_speaker)
+	return get_exchange_str(get_gun_table_from_speaker(first_speaker, second_speaker, 30))
+end
+function show_exchange_line_30(first_speaker, second_speaker)
+	return show_exchange(get_gun_table_from_speaker(first_speaker, second_speaker, 30))
+end
+
+-------------------------------------------------------------
+
+function all_deals_mcm(str)
+	all_deals = all_deals .. "\\n%c[default]" .. str
+end
+
+function all_deals_log(str)
+	if debug_to_log then printf(str) end
+end
+
+function load_mcm_deals_table()
+	all_deals = ""
+
+	all_deals_log(" ")
+	all_deals_log("--------------------------------------------------------------------------------")
+	all_deals_log("-------------------------- AFTERMARKET UPGRADES TABLE --------------------------")
+	all_deals_log("--------------------------------------------------------------------------------")
+	all_deals_log(" ")
+	all_deals_log(" MOD VERSION " .. aftermarket_upgrades_mcm.VERSION)
+	all_deals_log(" ")
+	all_deals_log("----------------------------------- SETTINGS -----------------------------------")
+	all_deals_log(" ")
+	all_deals_log(" toolkit_required = " 			.. tostring(toolkit_required))
+	all_deals_log(" toolkit_consume = " 			.. tostring(toolkit_consume))
+	all_deals_log(" mechanic_fee = " 				.. tostring(mechanic_fee))
+	all_deals_log(" mechanic_fee_enabled = " 		.. tostring(mechanic_fee_enabled))
+	all_deals_log(" bonus_items_enabled = "			.. tostring(bonus_items_enabled))
+	all_deals_log(" mags_enabled = " 				.. tostring(mags_enabled))
+	all_deals_log(" ")
+	all_deals_log(" cost_mode = " 					.. tostring(cost_mode))
+	all_deals_log(" cost_modifier_money = " 		.. tostring(cost_modifier_money))
+	all_deals_log(" cost_modifier_kits = " 			.. tostring(cost_modifier_kits))
+	all_deals_log(" cost_type_a = " 				.. tostring(cost_type_a))
+	all_deals_log(" cost_type_b = " 				.. tostring(cost_type_b))
+	all_deals_log(" cost_type_c = " 				.. tostring(cost_type_c))
+	all_deals_log(" cost_type_d = " 				.. tostring(cost_type_d))
+	all_deals_log(" ")
+	all_deals_log("--------------------------------------------------------------------------------")
+	all_deals_log(" ")
+
+	for faction_name, trader_sec in utils_data.pairsByKeys(aftermarket_upgrades_trades.debug_table) do
+		local i = 1
+
+		all_deals_mcm("%c[200,200,255,200][" .. faction_name .. " / " .. trader_sec .. "]")
+		all_deals_mcm(" ")
+		all_deals_log("[" .. faction_name .. " / " .. trader_sec .. "]")
+		all_deals_log(" ")
+
+		local trader_table = all_traders[trader_sec]
+
+		if trader_table then
+			for trader_sort, trader_gun in utils_data.pairsByKeys(trader_table) do
+				local gun_table = all_guns[trader_gun]
+
+				if i == MAX_EXCHANGES + 1 then
+					all_deals_mcm(clr_o .. "[Maximum amount of upgrade deals is reached. Rest will not be shown or accessed.]")
+					all_deals_log("[Maximum amount of upgrade deals is reached. Rest will not be shown or accessed.]")
+				end
+
+				if gun_table then
+					local sec = gun_table["exchange_section"] or "exchange_section_not_found"
+					local enabled = gun_table["exchange_enabled"] and ini_sys:section_exist(sec)
+
+					if enabled then
+						all_deals_mcm(i .. ". " .. get_exchange_str(gun_table, true) .. " %c[255,120,120,120][" .. get_exchange_cost(gun_table) .. " RU]")
+						all_deals_log(i .. ". " .. get_exchange_str(gun_table, true) .. " [" .. get_exchange_cost(gun_table) .. " RU]")
+						i = i + 1
+					else
+						all_deals_mcm(clr_o .. "~. " .. get_exchange_str(gun_table, true) .. " is disabled from all deals or doesn't exist.")
+						all_deals_log("~. " .. get_exchange_str(gun_table, true) .. " is disabled from all deals or doesn't exist.")
+					end
+				else
+					all_deals_mcm(clr_r .. "Weapon [" .. trader_gun .. "] doesn't exist in guns table!")
+					all_deals_log("Weapon [" .. trader_gun .. "] doesn't exist in guns table!")
+				end
+			end
+		else
+			all_deals_mcm(clr_r .. "Trader profile [" .. trader_sec .. "] is not found!")
+			all_deals_log("Trader profile [" .. trader_sec .. "] is not found!")
+		end
+
+		all_deals_mcm(" ")
+		all_deals_mcm(" ")
+		all_deals_log(" ")
+		all_deals_log("--------------------------------------------------------------------------------")
+		all_deals_log(" ")
+	end
+
+	aftermarket_upgrades_mcm.deals_table = all_deals
+end
+
+-------------------------------------------------------------
+
+function on_option_change()
+	if ui_mcm then
+		toolkit_required			= get_config("settings/toolkit_required")
+		toolkit_consume				= get_config("settings/toolkit_consume")
+		mechanic_fee				= get_config("settings/mechanic_fee")
+		mechanic_fee_enabled		= get_config("settings/mechanic_fee_enabled")
+		bonus_items_enabled			= get_config("settings/bonus_items_enabled")
+		mags_enabled				= get_config("settings/mags_enabled")
+
+		cost_mode					= get_config("settings/cost_mode")
+		cost_modifier_money			= get_config("settings/cost_modifier_money")
+		cost_modifier_kits			= get_config("settings/cost_modifier_kits")
+		cost_type_a					= get_config("settings/cost_type_a")
+		cost_type_b					= get_config("settings/cost_type_b")
+		cost_type_c					= get_config("settings/cost_type_c")
+		cost_type_d					= get_config("settings/cost_type_d")
+
+		debug_to_log				= get_config("debug/to_log")
+
+		printf("- Aftermarket Upgrades options is reloaded.")
+	end
+end
+
+
+function on_game_load()
+	load_mcm_deals_table()
+end
+
+function on_game_start()
+	RegisterScriptCallback("on_game_load", on_game_load)
+	RegisterScriptCallback("on_option_change", on_option_change)
+end
+

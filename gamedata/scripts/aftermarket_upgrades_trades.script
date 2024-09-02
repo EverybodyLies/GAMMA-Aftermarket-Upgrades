@@ -1,0 +1,1433 @@
+
+--- UTILITIES -----------------------------
+
+debug_table = {
+	["army-1"] = "army_south_mechan_mlr",
+	["army-2"] = "agr_smart_terrain_1_6_army_mechanic_stalker",
+	["bandit-1"] = "val_smart_terrain_7_3_bandit_mechanic_stalker",
+	["bandit-2"] = "jup_cont_mech_bandit",
+	["csky"] = "mar_base_stalker_tech",
+	["duty"] = "bar_visitors_stalker_mechanic",
+	["ecolog-1"] = "mechanic_army_yan_mlr",
+	["ecolog-2"] = "jup_b6_scientist_tech",
+	["freedom"] = "mil_smart_terrain_7_7_freedom_mechanic_stalker",
+	["isg"] = "jup_depo_isg_tech",
+	["merc-1"] = "cit_killers_merc_mechanic_stalker",
+	["merc-2"] = "zat_stancia_mech_merc",
+	["merc-3"] = "merc_pri_a18_mech_mlr",
+	["monolith-1"] = "pri_monolith_monolith_mechanic_stalker",
+	["monolith-2"] = "mechanic_monolith_kbo",
+	["monolith-xz"] = "mechanic_monolith_jup_depo",
+	["sin"] = "red_greh_tech",
+	["stalker-1"] = "esc_smart_terrain_5_7_loner_mechanic_stalker",
+	["stalker-2"] = "red_forester_tech",
+	["stalker-3"] = "zat_tech_mlr",
+	["stalker-4"] = "zat_a2_stalker_mechanic",
+	["stalker-5"] = "jup_b217_stalker_tech",
+	["stalker-6"] = "pri_a16_mech_mlr",
+}
+
+--- EXCHANGES -----------------------------
+
+exchanges = {
+
+	-- WARNING! 30 ACTIVE EXCHANGES IS A HARD LIMIT! REST WILL NEVER BE ACCESED!
+
+	-- ARMY -------------------------------
+
+	-- Seryoga / Серёга
+	["army_south_mechan_mlr"] = {
+		["00"] = "GAMMA_wpn_pm_actor",
+	--	["01"] = "GAMMA_wpn_sr1m_sr1upgr1",
+	--	["01"] = "GAMMA_wpn_sr1m_gurza_up",
+		["02"] = "GAMMA_wpn_pl15_tan_lazup_pl15",
+	--	["02"] = "GAMMA_wpn_pl15_tan_pl15_scolaz",
+	--	["03"] = "GAMMA_wpn_sr2_m1",
+		["04"] = "GAMMA_wpn_pp2000_operator",
+		["05"] = "GAMMA_wpn_vityaz",
+		["06"] = "GAMMA_wpn_ak74u_tac",
+	--	["07"] = "GAMMA_wpn_ak104_alfa",
+		["08"] = "GAMMA_wpn_ak105_sp",
+	--	["09"] = "GAMMA_wpn_rpk74_16",
+		["10"] = "GAMMA_wpn_rpk74",
+		["11"] = "GAMMA_wpn_rpk",
+		["12"] = "GAMMA_wpn_vsk94",
+	--	["12"] = "GAMMA_wpn_val_tac",
+	--	["13"] = "GAMMA_wpn_ash12_sup",
+	--	["14"] = "GAMMA_wpn_dvl10_m1",
+	--	["15"] = "GAMMA_wpn_dvl10",
+	--	["16"] = "GAMMA_wpn_pkp",
+	},
+
+	-- Senior Lieutenant Kirilov / Ст. лейтенант Кириллов
+	["agr_smart_terrain_1_6_army_mechanic_stalker"] = {
+		["01"] = "GAMMA_wpn_sr1m_sr1upgr1",
+	--	["01"] = "GAMMA_wpn_sr1m_gurza_up",
+	--	["02"] = "GAMMA_wpn_pl15_tan_lazup_pl15",
+	--	["02"] = "GAMMA_wpn_pl15_tan_pl15_scolaz",
+		["03"] = "GAMMA_wpn_sr2_m1",
+	--	["04"] = "GAMMA_wpn_pp2000_operator",
+	--	["05"] = "GAMMA_wpn_vityaz",
+		["06"] = "GAMMA_wpn_ak74u_tac",
+		["07"] = "GAMMA_wpn_ak104_alfa",
+		["08"] = "GAMMA_wpn_ak105_sp",
+		["09"] = "GAMMA_wpn_rpk74_16",
+	--	["10"] = "GAMMA_wpn_rpk74",
+	--	["11"] = "GAMMA_wpn_rpk",
+	--	["12"] = "GAMMA_wpn_vsk94",
+		["12"] = "GAMMA_wpn_val_tac",
+		["13"] = "GAMMA_wpn_ash12_sup",
+		["14"] = "GAMMA_wpn_dvl10_m1",
+		["15"] = "GAMMA_wpn_dvl10",
+		["16"] = "GAMMA_wpn_pkp",
+	},
+
+
+	-- BANDITS ----------------------------
+
+	-- Limpid / Прозрачный
+	["val_smart_terrain_7_3_bandit_mechanic_stalker"] = {
+		["00"] = "GAMMA_wpn_walther_p99_mod9",
+		["01"] = "GAMMA_wpn_thompson_m1a1",
+	--	["01"] = "GAMMA_wpn_mp5_nimble",
+		["02"] = "GAMMA_wpn_toz34_mark4_23",
+	--	["03"] = "GAMMA_wpn_ak74u_tac",
+	--	["03"] = "GAMMA_wpn_ak74m_beard",
+		["04"] = "GAMMA_wpn_rpk74",
+		["05"] = "GAMMA_wpn_rpk",
+		["06"] = "GAMMA_wpn_sks_molot",
+	--	["07"] = "GAMMA_wpn_sks_tac",
+	--	["08"] = "GAMMA_wpn_svds",
+		["09"] = "GAMMA_wpn_k98_mod",
+	},
+
+	-- Nile / Бомбила
+	["jup_cont_mech_bandit"] = {
+		["00"] = "GAMMA_wpn_sig226_226sig_kit",
+	--	["01"] = "GAMMA_wpn_thompson_m1a1",
+		["01"] = "GAMMA_wpn_mp5_nimble",
+		["02"] = "GAMMA_wpn_toz34_mark4_23",
+	--	["03"] = "GAMMA_wpn_ak74u_tac",
+		["03"] = "GAMMA_wpn_ak74m_beard",
+		["04"] = "GAMMA_wpn_rpk74",
+		["05"] = "GAMMA_wpn_rpk",
+	--	["06"] = "GAMMA_wpn_sks_molot",
+		["07"] = "GAMMA_wpn_sks_tac",
+		["08"] = "GAMMA_wpn_svds",
+		["09"] = "GAMMA_wpn_k98_mod",
+	},
+
+
+	-- CSKY -------------------------------
+
+	-- Novikov / Новиков
+	["mar_base_stalker_tech"] = {
+		["00"] = "GAMMA_wpn_fnx45_custom", -- shitty green one
+		["01"] = "GAMMA_wpn_sig220_n_upg220",
+		["02"] = "GAMMA_wpn_toz34_mark4_23",
+	--	["02"] = "GAMMA_wpn_bm16_full_alt_23",
+		["03"] = "GAMMA_wpn_ak105_swamp",
+		["04"] = "GAMMA_wpn_l85_m3",
+	--	["05"] = "GAMMA_wpn_aug_a1_custom_bas",
+		["05"] = "GAMMA_wpn_aug_a3_custom_bas",
+		["06"] = "GAMMA_wpn_sig550_custom",
+		["07"] = "GAMMA_wpn_remington700_archangel",
+	--	["07"] = "GAMMA_wpn_remington700_magpul_pro",
+	--	["07"] = "GAMMA_wpn_remington700_mod_x_gen3",
+	},
+
+
+	-- DUTY -------------------------------
+
+	-- Senior Sergeant Gromov-Potryko / Ст. сержант Громов-Потрыко
+	["bar_visitors_stalker_mechanic"] = {
+		["01"] = "GAMMA_wpn_sr1m_sr1upgr1",
+	--	["01"] = "GAMMA_wpn_sr1m_gurza_up",
+	--	["02"] = "GAMMA_wpn_pl15_tan_lazup_pl15",
+	--	["02"] = "GAMMA_wpn_pl15_tan_pl15_scolaz",
+		["03"] = "GAMMA_wpn_mp153_m1",
+	--	["04"] = "GAMMA_wpn_sr2_m1",
+	--	["05"] = "GAMMA_wpn_ak104_alfa",
+		["06"] = "GAMMA_wpn_ak74u_tac",
+	--	["07"] = "GAMMA_wpn_ak74_pmc",
+		["08"] = "GAMMA_wpn_ak105_shakal",
+		["09"] = "GAMMA_wpn_ak12",
+		["10"] = "GAMMA_wpn_rpk74",
+	--	["11"] = "GAMMA_wpn_rpk",
+		["12"] = "GAMMA_wpn_groza_nimble",
+		["13"] = "GAMMA_wpn_vsk94",
+	--	["13"] = "GAMMA_wpn_val_tac",
+		["14"] = "GAMMA_wpn_sks_tac",
+		["15"] = "GAMMA_wpn_svds",
+	--	["15"] = "GAMMA_wpn_svds_pmc",
+		["16"] = "GAMMA_wpn_pkm_zulus",
+	},
+
+
+	-- ECOLOG -----------------------------
+
+	-- Peregrine / Сапсан
+	["mechanic_army_yan_mlr"] = {
+		["00"] = "GAMMA_wpn_fnx45_alt", -- sand one
+	--	["00"] = "GAMMA_wpn_usp_tac",
+		["01"] = "GAMMA_wpn_toz34_mark4_23",
+	--	["01"] = "GAMMA_wpn_bm16_full_alt_23",
+		["02"] = "GAMMA_wpn_ks23_kaban_kab_up",
+		["03"] = "GAMMA_wpn_ks23_ecolog",
+		["04"] = "GAMMA_wpn_saiga12s_m1",
+	--	["05"] = "GAMMA_wpn_ak74u_tac",
+		["06"] = "GAMMA_wpn_ak105_swamp",
+		["07"] = "GAMMA_wpn_l85_m3",
+	--	["08"] = "GAMMA_wpn_sig550_custom",
+	--	["09"] = "GAMMA_wpn_m4_butcher",
+	--	["10"] = "GAMMA_wpn_m4_ru556",
+		["11"] = "GAMMA_wpn_vintorez_m1",
+	},
+
+	-- Tukarev / Гарин
+	["jup_b6_scientist_tech"] = {
+	--	["00"] = "GAMMA_wpn_fnx45_alt", -- sand one
+		["00"] = "GAMMA_wpn_usp_tac",
+	--	["01"] = "GAMMA_wpn_toz34_mark4_23",
+	--	["01"] = "GAMMA_wpn_bm16_full_alt_23",
+		["02"] = "GAMMA_wpn_ks23_kaban_kab_up",
+		["03"] = "GAMMA_wpn_ks23_ecolog",
+		["04"] = "GAMMA_wpn_saiga12s_m1",
+	--	["05"] = "GAMMA_wpn_ak74u_tac",
+		["06"] = "GAMMA_wpn_ak105_swamp",
+	--	["07"] = "GAMMA_wpn_l85_m3",
+		["08"] = "GAMMA_wpn_sig550_custom",
+		["09"] = "GAMMA_wpn_m4_butcher",
+		["10"] = "GAMMA_wpn_m4_ru556",
+	--	["11"] = "GAMMA_wpn_vintorez_m1",
+	},
+
+
+	-- FREEDOM ----------------------------
+
+	-- Screw / Шуруп
+	["mil_smart_terrain_7_7_freedom_mechanic_stalker"] = {
+	--	["00"] = "GAMMA_wpn_sig220_n_upg220",
+		["00"] = "GAMMA_wpn_usp_match",
+		["01"] = "GAMMA_wpn_mp5_nimble",
+		["02"] = "GAMMA_wpn_p90",
+	--	["02"] = "GAMMA_wpn_p90gamma",
+		["03"] = "GAMMA_wpn_ar15_freedom",
+		["04"] = "GAMMA_wpn_m4_tac",
+		["05"] = "GAMMA_wpn_m4_butcher",
+	--	["06"] = "GAMMA_wpn_aug_a1_custom_bas",
+		["06"] = "GAMMA_wpn_aug_a3_custom_bas",
+	--	["07"] = "GAMMA_wpn_l85_m3",
+		["08"] = "GAMMA_wpn_sig550_custom",
+		["09"] = "GAMMA_wpn_scar_siber_m2",
+
+	--	["10"] = "UGP06_wpn_svu_pmc",
+	},
+
+
+	-- ISG --------------------------------
+
+	-- Lieutenant Maus / Лейтенант Маус
+	["jup_depo_isg_tech"] = {
+		["00"] = "GAMMA_wpn_sig220_n_u2p2g0r",
+		["01"] = "GAMMA_wpn_colt1911_custom",
+		["02"] = "GAMMA_wpn_mp5_nimble",
+		["03"] = "GAMMA_wpn_saiga12s_isg",
+		["04"] = "GAMMA_wpn_ak5c_isg",
+		["05"] = "GAMMA_wpn_m4_tac",
+		["06"] = "GAMMA_wpn_ak74u_m1_isg",
+		["07"] = "GAMMA_wpn_ak74_isg",
+		["08"] = "GAMMA_wpn_akm_isg",
+		["09"] = "GAMMA_wpn_vintorez_isg",
+		["10"] = "GAMMA_wpn_scar_siber_m2",
+	},
+
+
+	-- MERCS ------------------------------
+
+	-- Hog / Хог
+	["cit_killers_merc_mechanic_stalker"] = {
+	--	["00"] = "GAMMA_wpn_fnx45", -- gray one
+		["00"] = "GAMMA_wpn_sig226_226sig_kit",
+	--	["00"] = "GAMMA_wpn_sig220_n_u2p2g0r",
+	--	["00"] = "GAMMA_wpn_colt1911_custom",
+		["01"] = "GAMMA_wpn_p90",
+	--	["01"] = "GAMMA_wpn_p90gamma",
+		["02"] = "GAMMA_wpn_saiga12s_m2",
+	--	["02"] = "GAMMA_wpn_saiga12s_isg",
+		["03"] = "GAMMA_wpn_ak74_pmc",
+		["04"] = "GAMMA_wpn_g36nimble_rwap",
+	--	["05"] = "GAMMA_wpn_ak5c_isg",
+	--	["06"] = "GAMMA_wpn_m4_tac",
+	--	["06"] = "GAMMA_wpn_m4_ru556",
+	--	["07"] = "GAMMA_wpn_akm_isg",
+	--	["08"] = "GAMMA_wpn_ak74u_m1_isg",
+	--	["09"] = "GAMMA_wpn_ak74_isg",
+		["10"] = "GAMMA_wpn_fal_sa58_osw",
+	--	["11"] = "GAMMA_wpn_fal_aus_kit_aus_tri",
+		["11"] = "GAMMA_wpn_fal_aus_kit_sa5x_spec",
+	--	["11"] = "GAMMA_wpn_fal_aus_kit_fal_leup",
+	--	["12"] = "GAMMA_wpn_scar_siber_m2",
+		["13"] = "GAMMA_wpn_vintorez_m2",
+	--	["13"] = "GAMMA_wpn_vintorez_isg",
+	--	["14"] = "GAMMA_wpn_svds",
+	--	["14"] = "GAMMA_wpn_svds_pmc",
+		["15"] = "GAMMA_wpn_remington700_archangel",
+	--	["15"] = "GAMMA_wpn_remington700_magpul_pro",
+	--	["15"] = "GAMMA_wpn_remington700_mod_x_gen3",
+	},
+
+	-- Kolin / Колин
+	["zat_stancia_mech_merc"] = {
+	--	["00"] = "GAMMA_wpn_fnx45", -- gray one
+	--	["00"] = "GAMMA_wpn_sig226_226sig_kit",
+		["00"] = "GAMMA_wpn_sig220_n_u2p2g0r",
+	--	["00"] = "GAMMA_wpn_colt1911_custom",
+		["01"] = "GAMMA_wpn_p90",
+	--	["01"] = "GAMMA_wpn_p90gamma",
+		["02"] = "GAMMA_wpn_saiga12s_m2",
+	--	["02"] = "GAMMA_wpn_saiga12s_isg",
+		["03"] = "GAMMA_wpn_ak74_pmc",
+	--	["04"] = "GAMMA_wpn_g36nimble_rwap",
+		["05"] = "GAMMA_wpn_ak5c_isg",
+	--	["06"] = "GAMMA_wpn_m4_tac",
+		["06"] = "GAMMA_wpn_m4_ru556",
+	--	["07"] = "GAMMA_wpn_akm_isg",
+	--	["08"] = "GAMMA_wpn_ak74u_m1_isg",
+	--	["09"] = "GAMMA_wpn_ak74_isg",
+	--	["10"] = "GAMMA_wpn_fal_sa58_osw",
+		["11"] = "GAMMA_wpn_fal_aus_kit_aus_tri",
+	--	["11"] = "GAMMA_wpn_fal_aus_kit_sa5x_spec",
+	--	["11"] = "GAMMA_wpn_fal_aus_kit_fal_leup",
+	--	["12"] = "GAMMA_wpn_scar_siber_m2",
+		["13"] = "GAMMA_wpn_vintorez_m2",
+	--	["13"] = "GAMMA_wpn_vintorez_isg",
+		["14"] = "GAMMA_wpn_svds",
+	--	["14"] = "GAMMA_wpn_svds_pmc",
+	--	["15"] = "GAMMA_wpn_remington700_archangel",
+		["15"] = "GAMMA_wpn_remington700_magpul_pro",
+	--	["15"] = "GAMMA_wpn_remington700_mod_x_gen3",
+	},
+
+	-- Trunk / Чемодан
+	["merc_pri_a18_mech_mlr"] = {
+	--	["00"] = "GAMMA_wpn_fnx45", -- gray one
+	--	["00"] = "GAMMA_wpn_sig226_226sig_kit",
+	--	["00"] = "GAMMA_wpn_sig220_n_u2p2g0r",
+		["00"] = "GAMMA_wpn_colt1911_custom",
+	--	["01"] = "GAMMA_wpn_p90",
+		["01"] = "GAMMA_wpn_p90gamma",
+	--	["02"] = "GAMMA_wpn_saiga12s_m2",
+		["02"] = "GAMMA_wpn_saiga12s_isg",
+	--	["03"] = "GAMMA_wpn_ak74_pmc",
+	--	["04"] = "GAMMA_wpn_g36nimble_rwap",
+		["05"] = "GAMMA_wpn_ak5c_isg",
+	--	["06"] = "GAMMA_wpn_m4_tac",
+	--	["06"] = "GAMMA_wpn_m4_ru556",
+		["07"] = "GAMMA_wpn_akm_isg",
+		["08"] = "GAMMA_wpn_ak74u_m1_isg",
+		["09"] = "GAMMA_wpn_ak74_isg",
+	--	["10"] = "GAMMA_wpn_fal_sa58_osw",
+	--	["11"] = "GAMMA_wpn_fal_aus_kit_aus_tri",
+	--	["11"] = "GAMMA_wpn_fal_aus_kit_sa5x_spec",
+		["11"] = "GAMMA_wpn_fal_aus_kit_fal_leup",
+	--	["12"] = "GAMMA_wpn_scar_siber_m2",
+	--	["13"] = "GAMMA_wpn_vintorez_m2",
+		["13"] = "GAMMA_wpn_vintorez_isg",
+	--	["14"] = "GAMMA_wpn_svds",
+		["14"] = "GAMMA_wpn_svds_pmc",
+	--	["15"] = "GAMMA_wpn_remington700_archangel",
+	--	["15"] = "GAMMA_wpn_remington700_magpul_pro",
+		["15"] = "GAMMA_wpn_remington700_mod_x_gen3",
+	},
+
+
+	-- MONOLITH ---------------------------
+
+	-- Cleric / Проповедник
+	["pri_monolith_monolith_mechanic_stalker"] = {
+		["00"] = "GAMMA_wpn_sig220_n_upg220",
+	--	["00"] = "GAMMA_wpn_sig220_n_u2p2g0r",
+	--	["01"] = "GAMMA_wpn_mp5_nimble",
+		["02"] = "GAMMA_wpn_mp153_m1",
+		["03"] = "GAMMA_wpn_ak12_custom",
+	--	["03"] = "GAMMA_wpn_ak12_custom_mono_kit",
+	--	["04"] = "GAMMA_wpn_ak74_isg",
+	--	["05"] = "GAMMA_wpn_akm_isg",
+		["06"] = "GAMMA_wpn_rpk74_16",
+		["07"] = "GAMMA_wpn_val_tac",
+		["08"] = "GAMMA_wpn_vintorez_m1",
+	--	["08"] = "GAMMA_wpn_vintorez_isg",
+		["09"] = "GAMMA_wpn_sks_tac",
+		["10"] = "GAMMA_wpn_svds",
+	--	["10"] = "GAMMA_wpn_svds_pmc",
+	--	["11"] = "GAMMA_wpn_pkp",
+	},
+
+	-- Bracer / Скрепа
+	["mechanic_monolith_kbo"] = {
+	--	["00"] = "GAMMA_wpn_sig220_n_upg220",
+		["00"] = "GAMMA_wpn_sig220_n_u2p2g0r",
+		["01"] = "GAMMA_wpn_mp5_nimble",
+		["02"] = "GAMMA_wpn_mp153_m1",
+	--	["03"] = "GAMMA_wpn_ak12_custom",
+		["03"] = "GAMMA_wpn_ak12_custom_mono_kit",
+		["04"] = "GAMMA_wpn_ak74_isg",
+		["05"] = "GAMMA_wpn_akm_isg",
+	--	["06"] = "GAMMA_wpn_rpk74_16",
+	--	["07"] = "GAMMA_wpn_val_tac",
+	--	["08"] = "GAMMA_wpn_vintorez_m1",
+		["08"] = "GAMMA_wpn_vintorez_isg",
+	--	["09"] = "GAMMA_wpn_sks_tac",
+	--	["10"] = "GAMMA_wpn_svds",
+		["10"] = "GAMMA_wpn_svds_pmc",
+		["11"] = "GAMMA_wpn_pkp",
+	},
+
+	-- ? who is this ?
+	["mechanic_monolith_jup_depo"] = {
+		["01"] = "GAMMA_wpn_mp5_nimble",
+		["02"] = "GAMMA_wpn_mp153_m1",
+	--	["03"] = "GAMMA_wpn_ak12_custom",
+		["03"] = "GAMMA_wpn_ak12_custom_mono_kit",
+	--	["04"] = "GAMMA_wpn_ak74_isg",
+	--	["05"] = "GAMMA_wpn_akm_isg",
+		["06"] = "GAMMA_wpn_rpk74_16",
+		["07"] = "GAMMA_wpn_val_tac",
+		["08"] = "GAMMA_wpn_vintorez_m1",
+	--	["08"] = "GAMMA_wpn_vintorez_isg",
+		["09"] = "GAMMA_wpn_sks_tac",
+	--	["10"] = "GAMMA_wpn_svds_pmc",
+		["10"] = "GAMMA_wpn_svds_pmc",
+		["11"] = "GAMMA_wpn_pkp",
+	},
+
+
+	-- LONERS -----------------------------
+
+	-- Xenotech / Фургон
+	["esc_smart_terrain_5_7_loner_mechanic_stalker"] = {
+		["00"] = "GAMMA_wpn_walther_p99_mod9",
+		["01"] = "GAMMA_wpn_toz34_mark4_23",
+	--	["01"] = "GAMMA_wpn_bm16_full_alt_23",
+		["02"] = "GAMMA_wpn_l85_m3",
+		["03"] = "GAMMA_wpn_rpk74",
+		["04"] = "GAMMA_wpn_rpk",
+	--	["05"] = "GAMMA_wpn_sig550_custom",
+		["06"] = "GAMMA_wpn_vsk94",
+		["07"] = "GAMMA_wpn_sks_molot",
+		["08"] = "GAMMA_wpn_k98_mod",
+	},
+
+	-- Forester / Лесник
+	["red_forester_tech"] = {
+		["01"] = "GAMMA_wpn_toz34_mark4_23",
+		["02"] = "GAMMA_wpn_bm16_full_alt_23",
+		["03"] = "GAMMA_wpn_sks_molot",
+		["04"] = "GAMMA_wpn_sks_tac",
+	--	["05"] = "GAMMA_wpn_k98_mod",
+		["05"] = "GAMMA_wpn_k98_mod_silen98",
+	--	["06"] = "GAMMA_wpn_vintorez_m1",
+	},
+
+	-- Spleen / Сплин
+	["zat_tech_mlr"] = {
+	--	["01"] = "GAMMA_wpn_saiga12s_m1",
+		["02"] = "GAMMA_wpn_ak74m_beard",
+		["03"] = "GAMMA_wpn_ak12",
+		["04"] = "GAMMA_wpn_l85_m3",
+	--	["05"] = "GAMMA_wpn_sig550_custom",
+		["06"] = "GAMMA_wpn_m4_butcher",
+		["07"] = "GAMMA_wpn_vintorez_m1",
+		["08"] = "GAMMA_wpn_remington700_archangel",
+	--	["08"] = "GAMMA_wpn_remington700_magpul_pro",
+	--	["08"] = "GAMMA_wpn_remington700_mod_x_gen3",
+	},
+
+	-- Cardan / Кардан
+	["zat_a2_stalker_mechanic"] = {
+		["01"] = "GAMMA_wpn_sig226_226sig_kit",
+		["02"] = "GAMMA_wpn_rpk74_16",
+		["03"] = "GAMMA_wpn_rpk74",
+		["04"] = "GAMMA_wpn_rpk",
+		["05"] = "GAMMA_wpn_sks_tac",
+		["06"] = "GAMMA_wpn_pkp",
+	},
+
+	-- Nitro / Азот
+	["jup_b217_stalker_tech"] = {
+	--	["01"] = "GAMMA_wpn_p90",
+		["02"] = "GAMMA_wpn_mp5_nimble",
+		["03"] = "GAMMA_wpn_sr2_m1",
+		["04"] = "GAMMA_wpn_saiga12s_m2",
+		["05"] = "GAMMA_wpn_ak74_pmc",
+		["08"] = "GAMMA_wpn_val_tac",
+		["09"] = "GAMMA_wpn_svds",
+		["10"] = "GAMMA_wpn_dvl10_m1",
+		["11"] = "GAMMA_wpn_dvl10",
+	--	["12"] = "GAMMA_wpn_remington700_archangel",
+		["12"] = "GAMMA_wpn_remington700_magpul_pro",
+	--	["12"] = "GAMMA_wpn_remington700_mod_x_gen3",
+	},
+
+	-- Sledge / Кувалда
+	["pri_a16_mech_mlr"] = {
+		["00"] = "GAMMA_wpn_sig220_n_u2p2g0r",
+		["01"] = "GAMMA_wpn_p90gamma",
+	--	["02"] = "GAMMA_wpn_saiga12s_m2",
+		["02"] = "GAMMA_wpn_saiga12s_isg",
+		["03"] = "GAMMA_wpn_ak5c_isg",
+		["04"] = "GAMMA_wpn_ak12_custom_mono_kit",
+	--	["05"] = "GAMMA_wpn_m4_tac",
+		["06"] = "GAMMA_wpn_scar_siber_m2",
+		["07"] = "GAMMA_wpn_vintorez_m2",
+		["08"] = "GAMMA_wpn_svds_pmc",
+	--	["09"] = "GAMMA_wpn_remington700_archangel",
+	--	["09"] = "GAMMA_wpn_remington700_magpul_pro",
+		["09"] = "GAMMA_wpn_remington700_mod_x_gen3",
+	},
+
+
+	-- RENEGADES --------------------------
+
+
+	-- SIN --------------------------------
+
+	-- Dazhbog / Дажбог
+	["red_greh_tech"] = {
+		["01"] = "GAMMA_wpn_toz34_mark4_23",
+		["02"] = "GAMMA_wpn_bm16_full_alt_23",
+		["03"] = "GAMMA_wpn_rpk74",
+		["04"] = "GAMMA_wpn_rpk",
+		["05"] = "GAMMA_wpn_sks_molot",
+	},
+
+}
+
+
+
+guns = {
+
+	-- G.A.M.M.A. BASE WEAPONS --
+
+	-- PISTOLS ----------------------------
+
+	["GAMMA_wpn_colt1911_custom"] = { -- Strayer Voigt Infinity
+		["exchange_section"] = "wpn_colt1911_custom", -- gun we will get from exchange (required)
+		["exchange_enabled"] = true, -- is exchange is enabled at all (not required, but would be disabled otherwise)
+		["exchange_cost"] = 39700, -- money or "item", which cost it would take (optional, or cost = weapon cost)
+		["exchange_bonus_mags"] = 3, -- if you play with MagsRedux enabled (takes from BONUS_MAGS is unspecified)
+		["exchange_bonus_item_wpn_sil_45"] = 1, -- giving bonus silencer for this pistol too (for free, optional)
+		["wpn_colt1911"] = true, -- gun we exchanging from, true means its shown in required guns, false is just hidden (but you can use it too)
+		["wpn_colt1911_new"] = false, -- and another gun that can be taken, hidden from required guns for not have visual bloat
+		["wpn_colt1911_duty"] = false,
+		["wpn_colt1911_alt"] = false,
+		["wpn_colt1911_merc"] = false,
+		["wpn_colt1911_modern"] = false,
+		["wpn_colt1911_n"] = false,
+	},
+
+	["GAMMA_wpn_fnx45"] = { -- gray one
+		["exchange_section"] = "wpn_fnx45",
+		["exchange_enabled"] = true,
+		["exchange_cost"] = 12500,
+		["exchange_bonus_mags"] = 3,
+		["wpn_fnp45"] = true,
+		["wpn_fnp45_custom"] = false,
+		["wpn_fnx45_alt"] = false,
+		["wpn_fnx45_custom"] = false,
+	},
+
+	["GAMMA_wpn_fnx45_alt"] = { -- sand one
+		["exchange_section"] = "wpn_fnx45_alt",
+		["exchange_enabled"] = true,
+		["exchange_cost"] = 12500,
+		["exchange_bonus_mags"] = 3,
+		["wpn_fnp45"] = true,
+		["wpn_fnp45_custom"] = false,
+		["wpn_fnx45"] = false,
+		["wpn_fnx45_custom"] = false,
+	},
+
+	["GAMMA_wpn_fnx45_custom"] = { -- shitty green one
+		["exchange_section"] = "wpn_fnx45_custom",
+		["exchange_enabled"] = true,
+		["exchange_cost"] = 12500,
+		["exchange_bonus_mags"] = 3,
+		["wpn_fnp45"] = true,
+		["wpn_fnp45_custom"] = false,
+		["wpn_fnx45"] = false,
+		["wpn_fnx45_alt"] = false,
+	},
+
+	["GAMMA_wpn_pm_actor"] = {
+		["exchange_section"] = "wpn_pm_actor",
+		["exchange_enabled"] = true,
+		["exchange_cost"] = 9000,
+		["exchange_bonus_mags"] = 2,
+		["exchange_bonus_item_wpn_sil_9mm"] = 1,
+		["wpn_pm"] = true,
+		["wpn_pm_custom"] = false,
+		["wpn_pm_bas"] = false,
+		["wpn_pm_bas_custom"] = false,
+		["wpn_pm_bas_actor"] = false,
+	},
+
+	["GAMMA_wpn_pl15_tan_lazup_pl15"] = {
+		["exchange_section"] = "wpn_pl15_tan_lazup_pl15",
+		["exchange_enabled"] = true,
+		["exchange_cost"] = "lazup_pl15",
+		["exchange_bonus_mags"] = 3,
+		["exchange_bonus_item_wpn_sil_pl15"] = 1,
+		["wpn_pl15_tan"] = true,
+		["wpn_pl15"] = false,
+	},
+
+	["GAMMA_wpn_pl15_tan_pl15_scolaz"] = {
+		["exchange_section"] = "wpn_pl15_tan_pl15_scolaz",
+		["exchange_enabled"] = true,
+		["exchange_cost"] = "pl15_scolaz",
+		["exchange_bonus_mags"] = 3,
+		["exchange_bonus_item_wpn_sil_pl15"] = 1,
+		["wpn_pl15_tan"] = true,
+		["wpn_pl15"] = false,
+	},
+
+	["GAMMA_wpn_sig220_n_u2p2g0r"] = { -- .45 / 19 bullets
+		["exchange_section"] = "wpn_sig220_n_u2p2g0r",
+		["exchange_enabled"] = true,
+		["exchange_cost"] = "u2p2g0r",
+		["exchange_bonus_mags"] = 3,
+		["exchange_bonus_item_wpn_sil_black_box"] = 1,
+		["wpn_sig220_n"] = true,
+	},
+
+	["GAMMA_wpn_sig220_n_upg220"] = { -- .45 / 12 bullets
+		["exchange_section"] = "wpn_sig220_n_upg220",
+		["exchange_enabled"] = true,
+		["exchange_cost"] = "u2p2g0r",
+		["exchange_bonus_mags"] = 3,
+		["exchange_bonus_item_wpn_sil_black_box"] = 1,
+		["wpn_sig220_n"] = true,
+	},
+
+	["GAMMA_wpn_sig226_226sig_kit"] = { -- 9x19 red wood grip one
+		["exchange_section"] = "wpn_sig226_226sig_kit",
+		["exchange_enabled"] = true,
+		["exchange_cost"] = "u2p2g0r",
+		["exchange_bonus_mags"] = 3,
+		["exchange_bonus_item_wpn_sil_osp9"] = 1,
+		["wpn_sig226"] = true,
+	},
+
+	["GAMMA_wpn_sr1m_gurza_up"] = {
+		["exchange_section"] = "wpn_sr1m_gurza_up",
+		["exchange_enabled"] = true,
+		["exchange_cost"] = "gurza_up",
+		["exchange_bonus_mags"] = 3,
+		["exchange_bonus_item_wpn_sil_sr1m"] = 1,
+		["wpn_sr1m"] = true,
+	},
+
+	["GAMMA_wpn_sr1m_sr1upgr1"] = {
+		["exchange_section"] = "wpn_sr1m_sr1upgr1",
+		["exchange_enabled"] = true,
+		["exchange_cost"] = "sr1upgr1",
+		["exchange_bonus_mags"] = 3,
+		["exchange_bonus_item_wpn_sil_sr1m"] = 1,
+		["wpn_sr1m"] = true,
+	},
+
+	["GAMMA_wpn_usp_match"] = {
+		["exchange_section"] = "wpn_usp_match",
+		["exchange_enabled"] = true,
+		["exchange_cost"] = 23700,
+		["exchange_bonus_mags"] = 3,
+		["exchange_bonus_item_wpn_sil_gemtech"] = 1,
+		["wpn_usp"] = true,
+		["wpn_usp_custom"] = false,
+	},
+
+	["GAMMA_wpn_usp_tac"] = {
+		["exchange_section"] = "wpn_usp_tac",
+		["exchange_enabled"] = true,
+		["exchange_cost"] = 37600,
+		["exchange_bonus_mags"] = 3,
+		["exchange_bonus_item_wpn_sil_black_box"] = 1,
+		["wpn_usp"] = true,
+		["wpn_usp_custom"] = false,
+		["wpn_usp_match"] = true,
+		["wpn_usp_nimble"] = false,
+	},
+
+	["GAMMA_wpn_walther_p99_mod9"] = {
+		["exchange_section"] = "wpn_walther_p99_mod9",
+		["exchange_enabled"] = true,
+		["exchange_cost"] = 7600,
+		["exchange_bonus_mags"] = 3,
+		["exchange_bonus_item_wpn_sil_gemtech"] = 1,
+		["wpn_walther"] = true,
+		["wpn_walther_custom"] = false,
+	},
+
+
+	-- SHOTGUNS ---------------------------
+
+	["GAMMA_wpn_bm16_full_alt_23"] = {
+		["exchange_section"] = "wpn_bm16_full_alt_23",
+		["exchange_enabled"] = true,
+		["exchange_cost"] = 23000,
+		["wpn_bm16_full"] = true,
+		["wpn_bm16_full_alt"] = false,
+	},
+
+	["GAMMA_wpn_toz34_mark4_23"] = {
+		["exchange_section"] = "wpn_toz34_mark4_23",
+		["exchange_enabled"] = true,
+		["exchange_cost"] = 23000,
+		["wpn_toz34"] = true,
+		["wpn_toz34_decor"] = false,
+		["wpn_toz34_custom"] = false,
+	},
+
+	["GAMMA_wpn_ks23_kaban_kab_up"] = {
+		["exchange_section"] = "wpn_ks23_kaban_kab_up",
+		["exchange_enabled"] = true,
+		["exchange_cost"] = "kab_up",
+	--	["exchange_bonus_item_wpn_sil_hex23"] = 1,
+		["wpn_ks23"] = true,
+		["wpn_ks23_23_up"] = false,
+		["wpn_ks23_kaban"] = true,
+	},
+
+	["GAMMA_wpn_ks23_ecolog"] = {
+		["exchange_section"] = "wpn_ks23_ecolog",
+		["exchange_enabled"] = false,
+		["exchange_cost"] = 13000,
+		["wpn_ks23"] = true,
+		["wpn_ks23_23_up"] = true,
+	},
+
+	["GAMMA_wpn_mp153"] = {
+		["exchange_section"] = "wpn_mp153",
+		["exchange_enabled"] = true,
+		["exchange_cost"] = 11000,
+		["wpn_mp153_m1"] = true,
+	},
+
+	["GAMMA_wpn_mp153_m1"] = {
+		["exchange_section"] = "wpn_mp153_m1",
+		["exchange_enabled"] = true,
+		["exchange_cost"] = 11000,
+	--	["exchange_bonus_item_wpn_sil_salvo"] = 1,
+		["wpn_mp153"] = true,
+	},
+
+	["GAMMA_wpn_saiga12s_m1"] = {
+		["exchange_section"] = "wpn_saiga12s_m1",
+		["exchange_enabled"] = true,
+		["exchange_cost"] = 18000,
+		["exchange_bonus_mags"] = 2,
+	--	["exchange_bonus_item_wpn_sil_kek12"] = 1,
+		["wpn_saiga12s"] = true,
+		["wpn_saiga12s_m2"] = true,
+	},
+
+	["GAMMA_wpn_saiga12s_m2"] = {
+		["exchange_section"] = "wpn_saiga12s_m2",
+		["exchange_enabled"] = true,
+		["exchange_cost"] = 16000,
+		["exchange_bonus_mags"] = 2,
+	--	["exchange_bonus_item_wpn_sil_kek12"] = 1,
+		["wpn_saiga12s"] = true,
+		["wpn_saiga12s_m1"] = true,
+	},
+
+	["GAMMA_wpn_saiga12s_isg"] = {
+		["exchange_section"] = "wpn_saiga12s_isg",
+		["exchange_enabled"] = true,
+		["exchange_cost"] = 58000,
+		["exchange_bonus_mags"] = 2,
+	--	["exchange_bonus_item_wpn_sil_salvo"] = 1,
+		["wpn_saiga12s_m1"] = true,
+		["wpn_saiga12s_m2"] = true,
+	},
+
+
+	-- SUBMACHINEGUNS ---------------------
+
+	["GAMMA_wpn_mp5_nimble"] = {
+		["exchange_section"] = "wpn_mp5_nimble",
+		["exchange_enabled"] = true,
+		["exchange_cost"] = 17000,
+		["exchange_bonus_mags"] = 2,
+	--	["exchange_bonus_item_wpn_sil_9mm"] = 1,
+		["wpn_mp5"] = true,
+		["wpn_mp5_alt"] = false,
+		["wpn_mp5_custom"] = false,
+	},
+
+	["GAMMA_wpn_p90"] = {
+		["exchange_section"] = "wpn_p90",
+		["exchange_enabled"] = true,
+		["exchange_cost"] = 27000,
+		["exchange_bonus_mags"] = 2,
+		["exchange_bonus_item_wpn_sil_57"] = 1,
+		["wpn_p90_gs"] = true,
+	},
+
+	["GAMMA_wpn_p90gamma"] = {
+		["exchange_section"] = "wpn_p90gamma",
+		["exchange_enabled"] = true,
+		["exchange_cost"] = 39000,
+		["exchange_bonus_mags"] = 2,
+		["exchange_bonus_item_wpn_sil_57"] = 1,
+		["wpn_p90_gs"] = true,
+		["wpn_p90"] = true,
+	},
+
+	["GAMMA_wpn_pp2000_operator"] = {
+		["exchange_section"] = "wpn_pp2000_operator",
+		["exchange_enabled"] = false,
+		["exchange_cost"] = 13000,
+		["exchange_bonus_mags"] = 2,
+	--	["exchange_bonus_item_wpn_sil_9mm"] = 1,
+		["wpn_pp2000"] = true,
+	},
+
+	["GAMMA_wpn_sr2_m1"] = {
+		["exchange_section"] = "wpn_sr2_m1",
+		["exchange_enabled"] = true,
+		["exchange_cost"] = 27500,
+		["exchange_bonus_mags"] = 2,
+		["exchange_bonus_item_wpn_sil_veresk"] = 1,
+		["wpn_sr2_veresk"] = true,
+	},
+
+	["GAMMA_wpn_thompson_m1a1"] = {
+		["exchange_section"] = "wpn_thompson_m1a1",
+		["exchange_enabled"] = true,
+		["exchange_cost"] = 16000,
+		["exchange_bonus_mags"] = 2,
+		["wpn_thompson_1921"] = true,
+	},
+
+	["GAMMA_wpn_vityaz"] = {
+		["exchange_section"] = "wpn_vityaz",
+		["exchange_enabled"] = true,
+		["exchange_cost"] = 17000,
+		["exchange_bonus_mags"] = 2,
+	--	["exchange_bonus_item_wpn_sil_pbs1"] = 1,
+		["wpn_bizon"] = true,
+		["wpn_ak105"] = true,
+	},
+
+
+	-- RIFLES -----------------------------
+
+	-- 5.56x45
+
+	["GAMMA_wpn_ak5c_isg"] = {
+		["exchange_section"] = "wpn_ak5c_isg",
+		["exchange_enabled"] = true,
+		["exchange_cost"] = 33000,
+		["exchange_bonus_mags"] = 2,
+	--	["exchange_bonus_item_wpn_sil_spec_isg"] = 1,
+		["wpn_ak5c_bas"] = true,
+	},
+
+	["GAMMA_wpn_aug_a1_custom_bas"] = {
+		["exchange_section"] = "wpn_aug_a1_custom_bas",
+		["exchange_enabled"] = true,
+		["exchange_cost"] = 23000,
+		["exchange_bonus_mags"] = 2,
+	--	["exchange_bonus_item_wpn_sil_auga"] = 1,
+		["wpn_aug_a1_bas"] = true,
+		["wpn_aug"] = false,
+	},
+
+	["GAMMA_wpn_aug_a3_custom_bas"] = {
+		["exchange_section"] = "wpn_aug_a3_custom_bas",
+		["exchange_enabled"] = true,
+		["exchange_cost"] = 23000,
+		["exchange_bonus_mags"] = 2,
+	--	["exchange_bonus_item_wpn_sil_auga"] = 1,
+		["wpn_aug_a3_bas"] = true,
+		["wpn_aug_modern"] = false,
+	},
+
+	["GAMMA_wpn_ar15_freedom"] = {
+		["exchange_section"] = "wpn_ar15_freedom",
+		["exchange_enabled"] = true,
+		["exchange_cost"] = 57000,
+		["exchange_bonus_mags"] = 2,
+	--	["exchange_bonus_item_wpn_sil_surfire"] = 1,
+		["wpn_m4_butcher"] = true,
+		["wpn_m4_tac"] = true,
+	},
+
+	["GAMMA_wpn_m4_butcher"] = {
+		["exchange_section"] = "wpn_m4_butcher",
+		["exchange_enabled"] = true,
+		["exchange_cost"] = 69000,
+		["exchange_bonus_mags"] = 2,
+	--	["exchange_bonus_item_wpn_sil_nato"] = 1,
+		["wpn_m4"] = false,
+		["wpn_m4a1_siber"] = true,
+	--	["wpn_m4_tac"] = true,
+	},
+
+	["GAMMA_wpn_m4_tac"] = {
+		["exchange_section"] = "wpn_m4_tac",
+		["exchange_enabled"] = true,
+		["exchange_cost"] = 43000,
+		["exchange_bonus_mags"] = 2,
+	--	["exchange_bonus_item_wpn_sil_surfire"] = 1,
+		["wpn_m4"] = false,
+		["wpn_m4a1_siber"] = true,
+		["wpn_m4a1"] = false,
+		["wpn_m4a1_camo"] = false,
+		["wpn_m4a1_custom"] = false,
+		["wpn_m4a1_freedom"] = false,
+	},
+
+	["GAMMA_wpn_m4_ru556"] = {
+		["exchange_section"] = "wpn_m4_ru556",
+		["exchange_enabled"] = true,
+		["exchange_cost"] = 47000,
+		["exchange_bonus_mags"] = 2,
+	--	["exchange_bonus_item_wpn_sil_nato"] = 1,
+		["wpn_m4_butcher"] = true,
+	},
+
+	["GAMMA_wpn_g36nimble_rwap"] = {
+		["exchange_section"] = "wpn_g36nimble_rwap",
+		["exchange_enabled"] = true,
+		["exchange_cost"] = 27000,
+		["exchange_bonus_mags"] = 2,
+	--	["exchange_bonus_item_wpn_sil_nato"] = 1,
+		["wpn_g36"] = true,
+		["wpn_g36_camo"] = false,
+		["wpn_g36_nimble"] = false,
+		["wpn_g36c_rwap"] = true,
+		["wpn_g36k"] = false,
+		["wpn_g36k_rwap"] = true,
+		["wpn_g36ka4_rwap"] = false,
+		["wpn_g36v_rwap"] = false,
+	},
+
+	["GAMMA_wpn_l85_m3"] = {
+		["exchange_section"] = "wpn_l85_m3",
+		["exchange_enabled"] = true,
+		["exchange_cost"] = 23000,
+		["exchange_bonus_mags"] = 2,
+	--	["exchange_bonus_item_wpn_sil_m42k"] = 1,
+		["wpn_l85_m1"] = true,
+		["wpn_l85_m2"] = false,
+		["wpn_l85"] = false,
+		["wpn_l85_alt"] = false,
+		["wpn_l85_custom"] = false,
+		["wpn_l85_modern"] = false,
+		["wpn_l85a2"] = false,
+		["wpn_l85a2_alt"] = false,
+		["wpn_l85a2_custom"] = false,
+		["wpn_l85a2_modern"] = false,
+	},
+
+	["GAMMA_wpn_sig550_custom"] = {
+		["exchange_section"] = "wpn_sig550_custom",
+		["exchange_enabled"] = true,
+		["exchange_cost"] = 21000,
+		["exchange_bonus_mags"] = 2,
+	--	["exchange_bonus_item_wpn_sil_nato"] = 1,
+		["wpn_sig550"] = true,
+		["wpn_sig550_camo"] = false,
+		["wpn_sig550_luckygun"] = true,
+	},
+
+	["GAMMA_wpn_ak105_swamp"] = {
+		["exchange_section"] = "wpn_ak105_swamp",
+		["exchange_enabled"] = true,
+		["exchange_cost"] = "swamp",
+		["exchange_bonus_mags"] = 2,
+	--	["exchange_bonus_item_wpn_sil_geks545"] = 1,
+		["wpn_ak101"] = true,
+		["wpn_ak102"] = true,
+		["wpn_ak105"] = true,
+	},
+
+	-- 5.45x39
+
+	["GAMMA_wpn_ak74u_tac"] = {
+		["exchange_section"] = "wpn_ak74u_tac",
+		["exchange_enabled"] = true,
+		["exchange_cost"] = 23000,
+		["exchange_bonus_mags"] = 2,
+		["exchange_bonus_item_wpn_sil_pbs4"] = 1,
+		["wpn_ak74u_n1"] = true,
+		["wpn_ak74u"] = false,
+		["wpn_ak74u_camo"] = false,
+		["wpn_ak74u_custom"] = false,
+		["wpn_ak74u_old"] = false,
+	},
+
+	["GAMMA_wpn_ak74u_m1_isg"] = {
+		["exchange_section"] = "wpn_ak74u_m1_isg",
+		["exchange_enabled"] = true,
+		["exchange_cost"] = 57000,
+		["exchange_bonus_mags"] = 2,
+	--	["exchange_bonus_item_wpn_sil_spec_isg"] = 1,
+		["wpn_ak74u_isg"] = true,
+		["wpn_ak74u_tac"] = true,
+	},
+
+	["GAMMA_wpn_ak74m_beard"] = {
+		["exchange_section"] = "wpn_ak74m_beard",
+		["exchange_enabled"] = true,
+		["exchange_cost"] = 18000,
+		["exchange_bonus_mags"] = 2,
+	--	["exchange_bonus_item_wpn_sil_tgp-a"] = 1,
+		["wpn_ak74_n"] = true,
+		["wpn_ak74"] = false,
+		["wpn_ak74_alt"] = false,
+		["wpn_ak74_custom"] = false,
+		["wpn_ak74_modern"] = false,
+		["wpn_ak74_old"] = false,
+		["wpn_ak74m_n"] = true,
+		["wpn_ak74m"] = false,
+		["wpn_ak74m_alt"] = false,
+	},
+
+	["GAMMA_wpn_ak74_pmc"] = {
+		["exchange_section"] = "wpn_ak74_pmc",
+		["exchange_enabled"] = true,
+		["exchange_cost"] = 39000,
+		["exchange_bonus_mags"] = 2,
+	--	["exchange_bonus_item_wpn_sil_atg"] = 1,
+		["wpn_ak74_n"] = true,
+		["wpn_ak74"] = false,
+		["wpn_ak74_alt"] = false,
+		["wpn_ak74_custom"] = false,
+		["wpn_ak74_modern"] = false,
+		["wpn_ak74_old"] = false,
+		["wpn_ak74m_beard"] = true,
+		["wpn_ak74m_n"] = true,
+		["wpn_ak74m"] = false,
+		["wpn_ak74m_alt"] = false,
+	},
+
+	["GAMMA_wpn_ak74_isg"] = {
+		["exchange_section"] = "wpn_ak74_isg",
+		["exchange_enabled"] = true,
+		["exchange_cost"] = 87000,
+		["exchange_bonus_mags"] = 2,
+	--	["exchange_bonus_item_wpn_sil_spec_isg"] = 1,
+		["wpn_ak74_pmc"] = true,
+	--	["wpn_ak74m_beard"] = true,
+	--	["wpn_ak12_custom_mono_kit"] = true,
+	--	["wpn_ak12_custom"] = true,
+	--	["wpn_ak12"] = true,
+	},
+
+	["GAMMA_wpn_ak105_shakal"] = {
+		["exchange_section"] = "wpn_ak105_shakal",
+		["exchange_enabled"] = true,
+		["exchange_cost"] = "shakal",
+		["exchange_bonus_mags"] = 2,
+	--	["exchange_bonus_item_wpn_sil_geks545"] = 1,
+		["wpn_ak105"] = true,
+		["wpn_ak74_n"] = true,
+		["wpn_ak74"] = false,
+		["wpn_ak74_alt"] = false,
+		["wpn_ak74_custom"] = false,
+		["wpn_ak74_modern"] = false,
+		["wpn_ak74_old"] = false,
+		["wpn_ak74m_n"] = true,
+		["wpn_ak74m"] = false,
+		["wpn_ak74m_alt"] = false,
+	},
+
+	["GAMMA_wpn_ak105_sp"] = {
+		["exchange_section"] = "wpn_ak105_sp",
+		["exchange_enabled"] = true,
+		["exchange_cost"] = 21000,
+		["exchange_bonus_mags"] = 2,
+	--	["exchange_bonus_item_wpn_sil_tgp-a"] = 1,
+		["wpn_ak105"] = true,
+		["wpn_ak74_n"] = true,
+		["wpn_ak74"] = false,
+		["wpn_ak74_alt"] = false,
+		["wpn_ak74_custom"] = false,
+		["wpn_ak74_modern"] = false,
+		["wpn_ak74_old"] = false,
+		["wpn_ak74m_n"] = true,
+		["wpn_ak74m"] = false,
+		["wpn_ak74m_alt"] = false,
+	},
+
+	["GAMMA_wpn_ak12"] = {
+		["exchange_section"] = "wpn_ak12",
+		["exchange_enabled"] = true,
+		["exchange_cost"] = 32000,
+		["exchange_bonus_mags"] = 2,
+	--	["exchange_bonus_item_wpn_sil_geks545"] = 1,
+		["wpn_ak12_m1"] = true,
+		["wpn_rpk74_16"] = true,
+	},
+
+	["GAMMA_wpn_ak12_custom"] = {
+		["exchange_section"] = "wpn_ak12_custom",
+		["exchange_enabled"] = true,
+		["exchange_cost"] = 24000,
+		["exchange_bonus_mags"] = 2,
+	--	["exchange_bonus_item_wpn_sil_geks545"] = 1,
+		["wpn_ak12"] = true,
+		["wpn_ak12_m1"] = false,
+	},
+
+	["GAMMA_wpn_ak12_custom_mono_kit"] = {
+		["exchange_section"] = "wpn_ak12_custom_mono_kit",
+		["exchange_enabled"] = true,
+		["exchange_cost"] = "mono_kit",
+		["exchange_bonus_mags"] = 2,
+	--	["exchange_bonus_item_wpn_sil_geks545"] = 1,
+	--	["wpn_ak12"] = true,
+	--	["wpn_ak12_m1"] = false,
+		["wpn_ak12_custom"] = true,
+	},
+
+	["GAMMA_wpn_groza_nimble"] = {
+		["exchange_section"] = "wpn_groza_nimble",
+		["exchange_enabled"] = true,
+		["exchange_cost"] = 46000,
+		["exchange_bonus_mags"] = 2,
+		["wpn_groza"] = true,
+	},
+
+	-- 7.62x39
+
+	["GAMMA_wpn_ak104_alfa"] = {
+		["exchange_section"] = "wpn_ak104_alfa",
+		["exchange_enabled"] = true,
+		["exchange_cost"] = 42000,
+		["exchange_bonus_mags"] = 2,
+	--	["exchange_bonus_item_wpn_sil_geks545"] = 1,
+		["wpn_ak104"] = true,
+		["wpn_ak103"] = true,
+		["wpn_ak103_camo"] = false,
+	},
+
+	["GAMMA_wpn_akm_isg"] = {
+		["exchange_section"] = "wpn_akm_isg",
+		["exchange_enabled"] = true,
+		["exchange_cost"] = 78000,
+		["exchange_bonus_mags"] = 2,
+	--	["exchange_bonus_item_wpn_sil_spec_isg"] = 1,
+		["wpn_ak104_alfa"] = true,
+	--	["wpn_ak103"] = true,
+	--	["wpn_ak103_camo"] = false,
+	},
+
+	-- 7.62x51
+
+	["GAMMA_wpn_fal_sa58_osw"] = {
+		["exchange_section"] = "wpn_fal_sa58_osw",
+		["exchange_enabled"] = true,
+		["exchange_cost"] = 25000,
+		["exchange_bonus_mags"] = 2,
+	--	["exchange_bonus_item_wpn_sil_aac762"] = 1,
+		["wpn_fal_aus"] = true,
+		["wpn_fal_aus_kit_aus_tri"] = false,
+		["wpn_fal_aus_kit_sa5x_spec"] = false,
+		["wpn_fal_aus_kit_fal_leup"] = false,
+	},
+
+	["GAMMA_wpn_fal_aus_kit_aus_tri"] = {
+		["exchange_section"] = "wpn_fal_aus_kit_aus_tri",
+		["exchange_enabled"] = true,
+		["exchange_cost"] = "kit_aus_tri",
+		["exchange_bonus_mags"] = 2,
+	--	["exchange_bonus_item_wpn_sil_aac762"] = 1,
+		["wpn_fal_aus"] = true,
+		["wpn_fal_aus_kit_sa5x_spec"] = false,
+		["wpn_fal_aus_kit_fal_leup"] = false,
+	},
+
+	["GAMMA_wpn_fal_aus_kit_sa5x_spec"] = {
+		["exchange_section"] = "wpn_fal_aus_kit_sa5x_spec",
+		["exchange_enabled"] = true,
+		["exchange_cost"] = "kit_sa5x_spec",
+		["exchange_bonus_mags"] = 2,
+	--	["exchange_bonus_item_wpn_sil_aac762"] = 1,
+		["wpn_fal_aus"] = true,
+		["wpn_fal_aus_kit_aus_tri"] = false,
+		["wpn_fal_aus_kit_fal_leup"] = false,
+	},
+
+	["GAMMA_wpn_fal_aus_kit_fal_leup"] = {
+		["exchange_section"] = "wpn_fal_aus_kit_fal_leup",
+		["exchange_enabled"] = true,
+		["exchange_cost"] = "kit_fal_leup",
+		["exchange_bonus_mags"] = 2,
+	--	["exchange_bonus_item_wpn_sil_aac762"] = 1,
+		["wpn_fal_aus"] = true,
+		["wpn_fal_aus_kit_aus_tri"] = false,
+		["wpn_fal_aus_kit_sa5x_spec"] = false,
+	},
+
+	["GAMMA_wpn_scar_siber_m2"] = {
+		["exchange_section"] = "wpn_scar_siber_m2",
+		["exchange_enabled"] = true,
+		["exchange_cost"] = 57000,
+		["exchange_bonus_mags"] = 2,
+	--	["exchange_bonus_item_wpn_sil_aac762"] = 1,
+		["wpn_scar"] = false,
+		["wpn_scar_custom"] = false,
+		["wpn_scar_new"] = false,
+		["wpn_scar_siber"] = true,
+		["wpn_scar_siber_black"] = false,
+		["wpn_scar_siber_m1"] = true,
+		["wpn_scar_siber_m1_black"] = false,
+	},
+
+	-- 9x39
+
+	["GAMMA_wpn_vsk94"] = {
+		["exchange_section"] = "wpn_vsk94",
+		["exchange_enabled"] = true,
+		["exchange_cost"] = 17000,
+		["exchange_bonus_mags"] = 2,
+		["wpn_9a91"] = true,
+	},
+
+	["GAMMA_wpn_val_tac"] = {
+		["exchange_section"] = "wpn_val_tac",
+		["exchange_enabled"] = true,
+		["exchange_cost"] = 27000,
+		["exchange_bonus_mags"] = 2,
+		["wpn_val"] = true,
+		["wpn_val_modern"] = false,
+		["wpn_vintorez_n1"] = true,
+		["wpn_vintorez"] = false,
+		["wpn_vintorez_alt"] = false,
+	},
+
+	["GAMMA_wpn_vintorez_n1"] = {
+		["exchange_section"] = "wpn_vintorez_n1",
+		["exchange_enabled"] = true,
+		["exchange_cost"] = 21000,
+		["exchange_bonus_mags"] = 2,
+		["wpn_val"] = true,
+		["wpn_val_modern"] = false,
+	},
+
+	["GAMMA_wpn_vintorez_m1"] = {
+		["exchange_section"] = "wpn_vintorez_m1",
+		["exchange_enabled"] = true,
+		["exchange_cost"] = 35000,
+		["exchange_bonus_mags"] = 2,
+		["wpn_vintorez_n1"] = true,
+		["wpn_vintorez"] = false,
+		["wpn_vintorez_alt"] = false,
+		["wpn_val"] = true,
+		["wpn_val_modern"] = false,
+		["wpn_val_tac"] = false,
+	},
+
+	["GAMMA_wpn_vintorez_m2"] = {
+		["exchange_section"] = "wpn_vintorez_m2",
+		["exchange_enabled"] = true,
+		["exchange_cost"] = 56000,
+		["exchange_bonus_mags"] = 2,
+		["wpn_vintorez_n1"] = true,
+		["wpn_vintorez"] = false,
+		["wpn_vintorez_alt"] = false,
+		["wpn_vintorez_m1"] = false,
+		["wpn_val"] = true,
+		["wpn_val_modern"] = false,
+		["wpn_val_tac"] = false,
+	},
+
+	["GAMMA_wpn_vintorez_isg"] = {
+		["exchange_section"] = "wpn_vintorez_isg",
+		["exchange_enabled"] = true,
+		["exchange_cost"] = 97000,
+		["exchange_bonus_mags"] = 2,
+		["wpn_vintorez_m1"] = true,
+		["wpn_vintorez_m2"] = true,
+		["wpn_val_tac"] = false,
+	},
+
+	-- 12.7x55
+
+	["GAMMA_wpn_ash12_sup"] = {
+		["exchange_section"] = "wpn_ash12_sup",
+		["exchange_enabled"] = true,
+		["exchange_cost"] = "sup",
+		["exchange_bonus_mags"] = 1,
+	--	["exchange_bonus_item_wpn_sil_ash12"] = 1,
+		["wpn_ash12"] = true,
+	},
+
+
+	-- MACHINEGUNS ------------------------
+
+	["GAMMA_wpn_rpk74_16"] = {
+		["exchange_section"] = "wpn_rpk74_16",
+		["exchange_enabled"] = true,
+		["exchange_cost"] = 24000,
+		["exchange_bonus_mags"] = 1,
+	--	["exchange_bonus_item_wpn_sil_geks545"] = 1,
+		["wpn_ak12_m1"] = true,
+	},
+
+	["GAMMA_wpn_rpk74"] = {
+		["exchange_section"] = "wpn_rpk74",
+		["exchange_enabled"] = true,
+		["exchange_cost"] = 21000,
+		["exchange_bonus_mags"] = 2,
+	--	["exchange_bonus_item_wpn_sil_tgp-a"] = 1,
+		["wpn_rpk"] = true,
+	},
+
+	["GAMMA_wpn_rpk"] = {
+		["exchange_section"] = "wpn_rpk",
+		["exchange_enabled"] = true,
+		["exchange_cost"] = 18000,
+		["exchange_bonus_mags"] = 2,
+		["wpn_rpk74"] = true,
+	},	
+
+	["GAMMA_wpn_pkm_zulus"] = {
+		["exchange_section"] = "wpn_pkm_zulus",
+		["exchange_enabled"] = true,
+		["exchange_cost"] = 28000,
+		["exchange_bonus_mags"] = 1,
+		["wpn_pkm"] = true,
+	},
+
+	["GAMMA_wpn_pkp"] = {
+		["exchange_section"] = "wpn_pkp",
+		["exchange_enabled"] = true,
+		["exchange_cost"] = 48000,
+		["exchange_bonus_mags"] = 1,
+		["wpn_pkm"] = true,
+	},
+
+
+	-- SNIPERS ----------------------------
+
+	["GAMMA_wpn_sks_molot"] = {
+		["exchange_section"] = "wpn_sks_molot",
+		["exchange_enabled"] = true,
+		["exchange_cost"] = 18000,
+		["exchange_bonus_mags"] = 2,
+		["wpn_sks_b"] = true,
+		["wpn_sks"] = false,
+		["wpn_sks_modern"] = false,
+	},
+
+	["GAMMA_wpn_sks_tac"] = {
+		["exchange_section"] = "wpn_sks_tac",
+		["exchange_enabled"] = true,
+		["exchange_cost"] = 12000,
+		["exchange_bonus_mags"] = 2,
+	--	["exchange_bonus_item_wpn_sil_hexagon"] = 1,
+		["wpn_sks_molot"] = true,
+	--	["wpn_sks_b"] = true,
+	--	["wpn_sks"] = false,
+	--	["wpn_sks_modern"] = false,
+	},
+
+	["GAMMA_wpn_k98_mod"] = {
+		["exchange_section"] = "wpn_k98_mod",
+		["exchange_enabled"] = true,
+		["exchange_cost"] = 37000,
+		["exchange_bonus_mags"] = 3,
+		["wpn_k98"] = true,
+	},
+
+	["GAMMA_wpn_k98_mod_silen98"] = {
+		["exchange_section"] = "wpn_k98_mod_silen98",
+		["exchange_enabled"] = true,
+		["exchange_cost"] = 53000,
+		["exchange_bonus_mags"] = 3,
+		["exchange_bonus_item_wpn_sil_forester"] = 1,
+		["exchange_bonus_item_ammo_7.92x33_ap"] = 1,
+		["wpn_k98"] = true,
+		["wpn_k98_mod"] = false,
+	},
+
+	["GAMMA_wpn_remington700_archangel"] = {
+		["exchange_section"] = "wpn_remington700_archangel",
+		["exchange_enabled"] = true,
+		["exchange_cost"] = "archangel",
+		["exchange_bonus_mags"] = 2,
+	--	["exchange_bonus_item_wpn_sil_daniel"] = 1,
+		["wpn_remington700"] = true,
+	},
+	
+	["GAMMA_wpn_remington700_magpul_pro"] = {
+		["exchange_section"] = "wpn_remington700_magpul_pro",
+		["exchange_enabled"] = true,
+		["exchange_cost"] = "magpul_pro",
+		["exchange_bonus_mags"] = 2,
+	--	["exchange_bonus_item_wpn_sil_daniel"] = 1,
+		["wpn_remington700"] = true,
+	},
+	
+	["GAMMA_wpn_remington700_mod_x_gen3"] = {
+		["exchange_section"] = "wpn_remington700_mod_x_gen3",
+		["exchange_enabled"] = true,
+		["exchange_cost"] = "mod_x_gen3",
+		["exchange_bonus_mags"] = 2,
+	--	["exchange_bonus_item_wpn_sil_daniel"] = 1,
+		["wpn_remington700"] = true,
+	},
+
+	["GAMMA_wpn_remington700_lapua700"] = {
+		["exchange_section"] = "wpn_remington700_lapua700",
+		["exchange_enabled"] = true,
+		["exchange_cost"] = "lapua700",
+		["exchange_bonus_mags"] = 3,
+	--	["exchange_bonus_item_wpn_sil_lapu7"] = 1,
+		["wpn_remington700"] = true,
+	},
+
+	["GAMMA_wpn_svds"] = {
+		["exchange_section"] = "wpn_svds",
+		["exchange_enabled"] = true,
+		["exchange_cost"] = 33000,
+		["exchange_bonus_mags"] = 2,
+	--	["exchange_bonus_item_wpn_sil_tgpv"] = 1,
+		["wpn_svd_m1"] = true,
+		["wpn_svd"] = false,
+		["wpn_svd_custom"] = false,
+	},
+
+	["GAMMA_wpn_svds_pmc"] = {
+		["exchange_section"] = "wpn_svds_pmc",
+		["exchange_enabled"] = true,
+		["exchange_cost"] = 85000,
+		["exchange_bonus_mags"] = 2,
+	--	["exchange_bonus_item_wpn_sil_rotor"] = 1,
+		["wpn_svds"] = true,
+	},
+
+	["GAMMA_wpn_dvl10"] = {
+		["exchange_section"] = "wpn_dvl10",
+		["exchange_enabled"] = true,
+		["exchange_cost"] = 56000,
+		["exchange_bonus_mags"] = 2,
+		["wpn_dvl10_m1"] = true,
+	},
+
+	["GAMMA_wpn_dvl10_m1"] = {
+		["exchange_section"] = "wpn_dvl10_m1",
+		["exchange_enabled"] = true,
+		["exchange_cost"] = 60000,
+		["exchange_bonus_mags"] = 2,
+		["wpn_dvl10"] = true,
+	},
+
+}
