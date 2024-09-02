@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="windows-1251"?>
+<string_table>
+
+	<string id="aftermarket_upgrades_dialog_start">
+		<text>I heard you can upgrade my weapons?</text>
+	</string>
+
+	<string id="aftermarket_upgrades_dialog_top">
+		<text>Let me see what I have got lying around. Yes, there are still some spare parts and addons for some guns:</text>
+	</string>
+	<string id="aftermarket_upgrades_dialog_bottom_inspect">
+		<text>Don't forget, no matter what parts I use, if your gun is a rusty pile of junk, you won't get a miracle out of it. And don't expect it to come out cheap, I'll still have to buy new parts later, this is not a charity here. For the work on your gun, you owe me another</text>
+	</string>
+	<string id="aftermarket_upgrades_dialog_bottom_for_free">
+		<text>Don't forget, no matter what parts I use, if your gun is a rusty pile of junk, you won't get a miracle out of it. And don't expect it to come out cheap, I'll still have to buy new parts later, this is not a charity here. Although, I won't charge you anything for my work</text>
+	</string>
+	<string id="aftermarket_upgrades_dialog_bottom_toolkit">
+		<text>, but you must bring your own tools.</text>
+	</string>
+	
+	<string id="aftermarket_upgrades_dialog_denied">
+		<text>Another one! I have nothing for your guns and never had, by God, I'm fed up! Go look for somebody else.</text>
+	</string>
+
+	<string id="aftermarket_upgrades_word_from">
+		<text>from</text>
+	</string>
+	<string id="aftermarket_upgrades_word_for">
+		<text>for</text>
+	</string>
+	<string id="aftermarket_upgrades_word_required_1">
+		<text>('</text>
+	</string>
+	<string id="aftermarket_upgrades_word_required_2">
+		<text>' is required)</text>
+	</string>
+
+	<string id="aftermarket_upgrades_dialog_exchange_select">
+		<text>Okay, show me what kind of gun you brought here.</text>
+	</string>
+	<string id="aftermarket_upgrades_dialog_exchange_no_money">
+		<text>Okay, forget it, I have no money.</text>
+	</string>
+	<string id="aftermarket_upgrades_dialog_exchange_no_toolkit">
+		<text>Damn, I forgot my tools.</text>
+	</string>
+	<string id="aftermarket_upgrades_dialog_exchange_agree">
+		<text>Here, take it.</text>
+	</string>
+	<string id="aftermarket_upgrades_dialog_exchange_disagree">
+		<text>I changed my mind.</text>
+	</string>
+	<string id="aftermarket_upgrades_dialog_exchange_done">
+		<text>Well, that's it, and you were afraid. Hold on to your gun, everything's fine with it.</text>
+	</string>
+
+	<string id="aftermarket_upgrades_exit_no_gun">
+		<text>I don't have any weapons to upgrade with me.</text>
+	</string>
+	<string id="aftermarket_upgrades_exit_later">
+		<text>I'll probably come see you later.</text>
+	</string>
+	<string id="aftermarket_upgrades_exit_getoutofhere">
+		<text>Okay, I got you, I'm already leaving.</text>
+	</string>
+	<string id="aftermarket_upgrades_exit_error">
+		<text>Awesome, I'll come back when I fix it.</text>
+	</string>
+
+</string_table>
