@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="windows-1251"?>
+<string_table>
+
+	<string id="aftermarket_upgrades_dialog_start">
+		<text>Я слышал, у тебя можно модернизировать оружие?</text>
+	</string>
+
+	<string id="aftermarket_upgrades_dialog_top">
+		<text>Дай-ка я погляжу, что у меня завалялось. Да, еще остались запчасти и обвесы для всяких стволов:</text>
+	</string>
+	<string id="aftermarket_upgrades_dialog_bottom">
+		<text>Не забывай, какие бы я детали не использовал, если твоя пушка - ржавая куча хлама, чуда на выходе не получишь. И не жди, что выйдет дешево, мне все равно потом придется закупать детали по новой, здесь тебе не благотворительность. За работу будешь должен еще</text>
+	</string>
+	<string id="aftermarket_upgrades_dialog_bottom_for_free">
+		<text>Не забывай, какие бы я детали не использовал, если твоя пушка - ржавая куча хлама, чуда на выходе не получишь. И не жди, что выйдет дешево, мне все равно потом придется закупать детали по новой, здесь тебе не благотворительность. Хотя, за работу я с тебя ничего не возьму</text>
+	</string>
+	<string id="aftermarket_upgrades_dialog_bottom_toolkit">
+		<text>, но инструменты все равно тащи свои.</text>
+	</string>
+
+	<string id="aftermarket_upgrades_dialog_denied">
+		<text>Еще один! Нет у меня ничего для ваших пушек и не было, ей-богу достали! Иди ищи кого-нибудь другого.</text>
+	</string>
+
+	<string id="aftermarket_upgrades_word_from">
+		<text>из</text>
+	</string>
+	<string id="aftermarket_upgrades_word_for">
+		<text>за</text>
+	</string>
+	<string id="aftermarket_upgrades_word_required_1">
+		<text>(требуется '</text>
+	</string>
+	<string id="aftermarket_upgrades_word_required_2">
+		<text>')</text>
+	</string>
+
+	<string id="aftermarket_upgrades_dialog_exchange_select">
+		<text>Хорошо, показывай давай, что за ствол ты там притащил.</text>
+	</string>
+	<string id="aftermarket_upgrades_dialog_exchange_no_money">
+	<!--<text>Ладно, забудь, денег нет.</text>-->
+		<text>Ладно, забудь, не хватает денег</text>
+	</string>
+	<string id="aftermarket_upgrades_dialog_exchange_no_toolkit">
+		<text>Черт, я забыл инструменты.</text>
+	</string>
+	<string id="aftermarket_upgrades_dialog_exchange_agree">
+		<text>На, держи.</text>
+	</string>
+	<string id="aftermarket_upgrades_dialog_exchange_disagree">
+		<text>Я передумал.</text>
+	</string>
+	<string id="aftermarket_upgrades_dialog_exchange_done">
+		<text>Ну вот и все, а ты боялся. Держи свой ствол, все с ним в порядке.</text>
+	</string>
+
+	<string id="aftermarket_upgrades_exit_no_gun">
+		<text>Я попозже зайду, не захватил с собой ствол.</text>
+	</string>
+	<string id="aftermarket_upgrades_exit_later">
+		<text>Я пожалуй попозже к тебе зайду, как ствол подберу.</text>
+	</string>
+	<string id="aftermarket_upgrades_exit_getoutofhere">
+		<text>Хорошо, понял тебя, уже ухожу.</text>
+	</string>
+	<string id="aftermarket_upgrades_exit_error">
+		<text>Шикарно, вернусь, как починю.</text>
+	</string>
+
+</string_table>
