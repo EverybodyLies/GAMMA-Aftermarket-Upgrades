@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="windows-1251" ?>
+<game_dialogs>
+	
+	<dialog id="aftermarket_upgrades_dialog">
+		<phrase_list>
+			<phrase id="0">
+				<text>aftermarket_upgrades_dialog_start</text>
+				<next>101</next>
+			</phrase>
+			<phrase id="101">
+				<script_text>aftermarket_upgrades.exchange_dialog</script_text>
+				<next>990</next>
+				<next>1</next>
+				<next>2</next>
+				<next>3</next>
+				<next>4</next>
+				<next>5</next>
+				<next>6</next>
+				<next>7</next>
+				<next>8</next>
+				<next>9</next>
+				<next>10</next>
+				<next>11</next>
+				<next>12</next>
+				<next>13</next>
+				<next>14</next>
+				<next>15</next>
+				<next>16</next>
+				<next>17</next>
+				<next>18</next>
+				<next>19</next>
+				<next>20</next>
+				<next>21</next>
+				<next>22</next>
+				<next>23</next>
+				<next>24</next>
+				<next>25</next>
+				<next>26</next>
+				<next>27</next>
+				<next>28</next>
+				<next>29</next>
+				<next>30</next>
+			</phrase>
+
+
+			<phrase id="1">
+				<script_text>aftermarket_upgrades.st_exchange_line_1</script_text>
+				<precondition>aftermarket_upgrades.show_exchange_line_1</precondition>
+				<next>900</next>
+			</phrase>
+
+			<phrase id="2">
+				<script_text>aftermarket_upgrades.st_exchange_line_2</script_text>
+				<precondition>aftermarket_upgrades.show_exchange_line_2</precondition>
+				<next>900</next>
+			</phrase>
+
+			<phrase id="3">
+				<script_text>aftermarket_upgrades.st_exchange_line_3</script_text>
+				<precondition>aftermarket_upgrades.show_exchange_line_3</precondition>
+				<next>900</next>
+			</phrase>
+
+			<phrase id="4">
+				<script_text>aftermarket_upgrades.st_exchange_line_4</script_text>
+				<precondition>aftermarket_upgrades.show_exchange_line_4</precondition>
+				<next>900</next>
+			</phrase>
+
+			<phrase id="5">
+				<script_text>aftermarket_upgrades.st_exchange_line_5</script_text>
+				<precondition>aftermarket_upgrades.show_exchange_line_5</precondition>
+				<next>900</next>
+			</phrase>
+
+			<phrase id="6">
+				<script_text>aftermarket_upgrades.st_exchange_line_6</script_text>
+				<precondition>aftermarket_upgrades.show_exchange_line_6</precondition>
+				<next>900</next>
+			</phrase>
+
+			<phrase id="7">
+				<script_text>aftermarket_upgrades.st_exchange_line_7</script_text>
+				<precondition>aftermarket_upgrades.show_exchange_line_7</precondition>
+				<next>900</next>
+			</phrase>
+
+			<phrase id="8">
+				<script_text>aftermarket_upgrades.st_exchange_line_8</script_text>
+				<precondition>aftermarket_upgrades.show_exchange_line_8</precondition>
+				<next>900</next>
+			</phrase>
+
+			<phrase id="9">
+				<script_text>aftermarket_upgrades.st_exchange_line_9</script_text>
+				<precondition>aftermarket_upgrades.show_exchange_line_9</precondition>
+				<next>900</next>
+			</phrase>
+
+			<phrase id="10">
+				<script_text>aftermarket_upgrades.st_exchange_line_10</script_text>
+				<precondition>aftermarket_upgrades.show_exchange_line_10</precondition>
+				<next>900</next>
+			</phrase>
+
+			<phrase id="11">
+				<script_text>aftermarket_upgrades.st_exchange_line_11</script_text>
+				<precondition>aftermarket_upgrades.show_exchange_line_11</precondition>
+				<next>900</next>
+			</phrase>
+
+			<phrase id="12">
+				<script_text>aftermarket_upgrades.st_exchange_line_12</script_text>
+				<precondition>aftermarket_upgrades.show_exchange_line_12</precondition>
+				<next>900</next>
+			</phrase>
+
+			<phrase id="13">
+				<script_text>aftermarket_upgrades.st_exchange_line_13</script_text>
+				<precondition>aftermarket_upgrades.show_exchange_line_13</precondition>
+				<next>900</next>
+			</phrase>
+
+			<phrase id="14">
+				<script_text>aftermarket_upgrades.st_exchange_line_14</script_text>
+				<precondition>aftermarket_upgrades.show_exchange_line_14</precondition>
+				<next>900</next>
+			</phrase>
+
+			<phrase id="15">
+				<script_text>aftermarket_upgrades.st_exchange_line_15</script_text>
+				<precondition>aftermarket_upgrades.show_exchange_line_15</precondition>
+				<next>900</next>
+			</phrase>
+
+			<phrase id="16">
+				<script_text>aftermarket_upgrades.st_exchange_line_16</script_text>
+				<precondition>aftermarket_upgrades.show_exchange_line_16</precondition>
+				<next>900</next>
+			</phrase>
+
+			<phrase id="17">
+				<script_text>aftermarket_upgrades.st_exchange_line_17</script_text>
+				<precondition>aftermarket_upgrades.show_exchange_line_17</precondition>
+				<next>900</next>
+			</phrase>
+
+			<phrase id="18">
+				<script_text>aftermarket_upgrades.st_exchange_line_18</script_text>
+				<precondition>aftermarket_upgrades.show_exchange_line_18</precondition>
+				<next>900</next>
+			</phrase>
+
+			<phrase id="19">
+				<script_text>aftermarket_upgrades.st_exchange_line_19</script_text>
+				<precondition>aftermarket_upgrades.show_exchange_line_19</precondition>
+				<next>900</next>
+			</phrase>
+
+			<phrase id="20">
+				<script_text>aftermarket_upgrades.st_exchange_line_20</script_text>
+				<precondition>aftermarket_upgrades.show_exchange_line_20</precondition>
+				<next>900</next>
+			</phrase>
+
+			<phrase id="21">
+				<script_text>aftermarket_upgrades.st_exchange_line_21</script_text>
+				<precondition>aftermarket_upgrades.show_exchange_line_21</precondition>
+				<next>900</next>
+			</phrase>
+
+			<phrase id="22">
+				<script_text>aftermarket_upgrades.st_exchange_line_22</script_text>
+				<precondition>aftermarket_upgrades.show_exchange_line_22</precondition>
+				<next>900</next>
+			</phrase>
+
+			<phrase id="23">
+				<script_text>aftermarket_upgrades.st_exchange_line_23</script_text>
+				<precondition>aftermarket_upgrades.show_exchange_line_23</precondition>
+				<next>900</next>
+			</phrase>
+
+			<phrase id="24">
+				<script_text>aftermarket_upgrades.st_exchange_line_24</script_text>
+				<precondition>aftermarket_upgrades.show_exchange_line_24</precondition>
+				<next>900</next>
+			</phrase>
+
+			<phrase id="25">
+				<script_text>aftermarket_upgrades.st_exchange_line_25</script_text>
+				<precondition>aftermarket_upgrades.show_exchange_line_25</precondition>
+				<next>900</next>
+			</phrase>
+
+			<phrase id="26">
+				<script_text>aftermarket_upgrades.st_exchange_line_26</script_text>
+				<precondition>aftermarket_upgrades.show_exchange_line_26</precondition>
+				<next>900</next>
+			</phrase>
+
+			<phrase id="27">
+				<script_text>aftermarket_upgrades.st_exchange_line_27</script_text>
+				<precondition>aftermarket_upgrades.show_exchange_line_27</precondition>
+				<next>900</next>
+			</phrase>
+
+			<phrase id="28">
+				<script_text>aftermarket_upgrades.st_exchange_line_28</script_text>
+				<precondition>aftermarket_upgrades.show_exchange_line_28</precondition>
+				<next>900</next>
+			</phrase>
+
+			<phrase id="29">
+				<script_text>aftermarket_upgrades.st_exchange_line_29</script_text>
+				<precondition>aftermarket_upgrades.show_exchange_line_29</precondition>
+				<next>900</next>
+			</phrase>
+
+			<phrase id="30">
+				<script_text>aftermarket_upgrades.st_exchange_line_30</script_text>
+				<precondition>aftermarket_upgrades.show_exchange_line_30</precondition>
+				<next>900</next>
+			</phrase>
+
+
+			<phrase id="900">
+				<text>aftermarket_upgrades_dialog_exchange_select</text>
+				<next>901</next>
+				<next>902</next>
+				<next>903</next>
+				<next>904</next>
+				<next>905</next>
+				<next>980</next>
+			</phrase>
+
+			<phrase id="901">
+				<script_text>aftermarket_upgrades.st_actor_gun_1</script_text>
+				<precondition>aftermarket_upgrades.actor_have_gun_1</precondition>
+				<next>999</next>
+			</phrase>
+			<phrase id="902">
+				<script_text>aftermarket_upgrades.st_actor_gun_2</script_text>
+				<precondition>aftermarket_upgrades.actor_have_gun_2</precondition>
+				<next>999</next>
+			</phrase>
+			<phrase id="903">
+				<script_text>aftermarket_upgrades.st_actor_gun_3</script_text>
+				<precondition>aftermarket_upgrades.actor_have_gun_3</precondition>
+				<next>999</next>
+			</phrase>
+			<phrase id="904">
+				<script_text>aftermarket_upgrades.st_actor_gun_4</script_text>
+				<precondition>aftermarket_upgrades.actor_have_gun_4</precondition>
+				<next>999</next>
+			</phrase>
+			<phrase id="905">
+				<script_text>aftermarket_upgrades.st_actor_gun_5</script_text>
+				<precondition>aftermarket_upgrades.actor_have_gun_5</precondition>
+				<next>999</next>
+			</phrase>
+
+
+			<phrase id="980">
+				<script_text>aftermarket_upgrades.exchange_dialog_disagree</script_text>
+			</phrase>
+			<phrase id="990">
+				<script_text>aftermarket_upgrades.exchange_dialog_exit</script_text>
+			</phrase>
+
+			<phrase id="999">
+				<text>aftermarket_upgrades_dialog_exchange_done</text>
+				<action>aftermarket_upgrades.exchange_gun</action>
+			</phrase>
+
+		</phrase_list>
+	</dialog>
+
+</game_dialogs>
