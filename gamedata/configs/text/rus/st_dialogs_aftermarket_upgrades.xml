@@ -68,4 +68,10 @@
 		<text>Ўикарно, вернусь, как починю.</text>
 	</string>
 
+	<!-- CUSTOM WEAPON NAMES -->
+
+	<string id="st_aftermarket_wpn_pkm_zulus">
+		<text>ѕ ћ как у «улуса</text>
+	</string>
+
 </string_table>
