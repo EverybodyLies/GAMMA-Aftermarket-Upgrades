@@ -9,7 +9,7 @@
 		<text>Main</text>
 	</string>
 		<string id="ui_mcm_aftermarket_upgrades_settings_title">
-			<text>Aftermarket Upgrades / 2.2</text>
+			<text>Aftermarket Upgrades / 2.3</text>
 		</string>
 		<string id="ui_mcm_aftermarket_upgrades_settings_descr">
 			<text>The Aftermarket Upgrades is a mod that allows players to exchange their weapons for 'upgraded' counterparts, \nwith each mechanic having unique sets of weapons to modify.\n \nOriginal author is CosmicEchoes, this version is forked and developed further by EverybodyLies. Big thanks to Grok, Darkasleif and Arti for their help with development of original version.</text>
@@ -27,14 +27,11 @@
 		</string>
 
 
-		<string id="ui_mcm_aftermarket_upgrades_mechanic_fee_title">
-			<text>Mechanic's fee</text>
+		<string id="ui_mcm_aftermarket_upgrades_upgrades_title">
+			<text>Previously installed upgrades</text>
 		</string>
-		<string id="ui_mcm_aftermarket_upgrades_settings_mechanic_fee">
-			<text>Cost of mechanic's work on your weapon</text>
-		</string>
-		<string id="ui_mcm_aftermarket_upgrades_settings_mechanic_fee_enabled">
-			<text>Enable additional charge for the work</text>
+		<string id="ui_mcm_aftermarket_upgrades_settings_upgrades_return_chance">
+			<text>Chance to get weapon upgrades back</text>
 		</string>
 
 
@@ -51,6 +48,17 @@
 		</string>
 		<string id="ui_mcm_aftermarket_upgrades_settings_mags_enabled">
 			<text>Give additional mags with the gun (it's free)</text>
+		</string>
+
+
+		<string id="ui_mcm_aftermarket_upgrades_mechanic_fee_title">
+			<text>Mechanic's fee</text>
+		</string>
+		<string id="ui_mcm_aftermarket_upgrades_settings_mechanic_fee">
+			<text>Cost of mechanic's work on your weapon</text>
+		</string>
+		<string id="ui_mcm_aftermarket_upgrades_settings_mechanic_fee_enabled">
+			<text>Enable additional charge for the work</text>
 		</string>
 
 

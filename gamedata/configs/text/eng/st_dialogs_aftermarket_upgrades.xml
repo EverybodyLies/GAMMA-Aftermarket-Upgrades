@@ -67,4 +67,10 @@
 		<text>Awesome, I'll come back when I fix it.</text>
 	</string>
 
+	<!-- CUSTOM WEAPON NAMES -->
+
+	<string id="st_aftermarket_wpn_pkm_zulus">
+		<text>PKM like Zulus had</text>
+	</string>
+
 </string_table>
