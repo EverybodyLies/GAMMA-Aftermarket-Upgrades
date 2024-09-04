@@ -66,11 +66,12 @@ local gun_to_exchange = nil
 
 local toolkit_required				= get_config("settings/toolkit_required")
 local toolkit_consume				= get_config("settings/toolkit_consume")
-local mechanic_fee					= get_config("settings/mechanic_fee")
-local mechanic_fee_enabled			= get_config("settings/mechanic_fee_enabled")
+local upgrades_return_chance		= get_config("settings/upgrades_return_chance")
 local bonus_items_enabled			= get_config("settings/bonus_items_enabled")
 local mags_enabled					= get_config("settings/mags_enabled")
 
+local mechanic_fee					= get_config("settings/mechanic_fee")
+local mechanic_fee_enabled			= get_config("settings/mechanic_fee_enabled")
 local cost_mode						= get_config("settings/cost_mode")
 local cost_modifier_money			= get_config("settings/cost_modifier_money")
 local cost_modifier_kits			= get_config("settings/cost_modifier_kits")
@@ -142,6 +143,24 @@ function exchange_gun(first_speaker, second_speaker)
 			end
 		end
 
+		-- CHECKING FOR INSTALLED UPRADES ON PREVIOUS GUN
+		local installed_upgrades = utils_item.get_upgrades_installed(gun_to_exchange)
+		local upgrades = {}
+		if installed_upgrades then
+			for i = 1, #installed_upgrades do
+				local upgrade_sec = utils_item.get_upgrade_sect_tool(gun_to_remove, installed_upgrades[i])
+				local upgrade_num = upgrades[upgrade_sec]
+			--	printf("- aftermarket_upgrades | installed upgrade = %s", upgrade_sec)
+				if math.random(100) <= upgrades_return_chance then
+					if upgrade_num then -- already has another upgrade of the same type
+						upgrades[upgrade_sec] = upgrade_num + 1
+					else -- adding upgrade first time
+						upgrades[upgrade_sec] = 1
+					end
+				end
+			end
+		end
+
 		-- TAKING AWAY GUN AND MONEY FOR UPGRADE PARTS COST
 		dialogs.relocate_item_section_from_actor(first_speaker, second_speaker, gun_to_remove)
 		dialogs.relocate_money_from_actor(first_speaker, second_speaker, cost)
@@ -173,6 +192,14 @@ function exchange_gun(first_speaker, second_speaker)
 				else
 				--	printf("- degrade_gun | default_mag for %s is nil", obj_sec)
 				end
+			end
+		end
+
+		-- GETTING UPGRADES INSTALLED ON PREVIOUS GUN BACK
+		if upgrades then
+			for upgr_sec, upgr_num in utils_data.pairsByKeys(upgrades) do
+				dialogs.relocate_item_section_to_actor(first_speaker, second_speaker, upgr_sec, upgr_num)
+			--	printf("- aftermarket_upgrades | returning upgrade [%s] x%s", upgr_sec, upgr_num)
 			end
 		end
 	
@@ -247,6 +274,7 @@ function get_exchange_str(gun_table, no_cost)
 	if not gun_table then return "exchange_none" end
 
 	local sec = gun_table["exchange_section"] or "exchange_section_not_found"
+	local name = (gun_table["exchange_name"] and gt(gun_table["exchange_name"])) or get_name(sec)
 	local cost = get_exchange_cost(gun_table)
 	local cost_total = cost
 	local toolkit = get_toolkit(sec)
@@ -307,9 +335,9 @@ function get_exchange_str(gun_table, no_cost)
 
 	if ini_sys:section_exist(sec) then
 		if state > 0 then
-			return get_name(sec) .. " (" .. gt("aftermarket_upgrades_word_from") .. " " .. required_guns .. ")"
+			return name .. " (" .. gt("aftermarket_upgrades_word_from") .. " " .. required_guns .. ")"
 		else
-			return get_name(sec) .. " (" .. gt("aftermarket_upgrades_word_from") .. " " .. required_guns .. ")" .. clr_o .. " [" .. cost_total .. " RU]"
+			return name .. " (" .. gt("aftermarket_upgrades_word_from") .. " " .. required_guns .. ")" .. clr_o .. " [" .. cost_total .. " RU]"
 		end
 	else -- for debug table
 		return sec .. " (" .. gt("aftermarket_upgrades_word_from") .. " " .. required_guns .. ")" .. clr_o .. " [" .. cost_total .. " RU]"
@@ -386,6 +414,7 @@ function exchange_dialog(first_speaker, second_speaker)
 		if exchanges_count[trader_sec] == MAX_EXCHANGES then break end
 
 		local sec = gun_table["exchange_section"] or "exchange_section_not_found"
+		local name = (gun_table["exchange_name"] and gt(gun_table["exchange_name"])) or get_name(sec)
 		local cost = get_exchange_cost(gun_table)
 		local enabled = gun_table["exchange_enabled"] and ini_sys:section_exist(sec)
 		local required_guns = ""
@@ -403,7 +432,7 @@ function exchange_dialog(first_speaker, second_speaker)
 				return "ERROR! Entry for [" .. sec .. "] has no valid guns to exchange (that is shown to player)!"
 			end
 
-			str_list = str_list .. " - " .. get_name(sec) .. " (" .. gt("aftermarket_upgrades_word_from") .. " " ..  required_guns .. ") "
+			str_list = str_list .. " - " .. name .. " (" .. gt("aftermarket_upgrades_word_from") .. " " ..  required_guns .. ") "
 				.. gt("aftermarket_upgrades_word_for") .. " " .. cost .. " RU\\n"
 			exchanges_count[trader_sec] = exchanges_count[trader_sec] + 1
 		end
@@ -417,7 +446,7 @@ function exchange_dialog(first_speaker, second_speaker)
 	if exchanges_count[trader_sec] > 0 then
 		if mechanic_fee > 0 then
 			return gt("aftermarket_upgrades_dialog_top") .. " \\n \\n" .. str_list .. "\\n \\n" .. gt("aftermarket_upgrades_dialog_bottom") .. " "
-				.. mechanic_fee .. " RU" .. dialog_end
+				.. mechanic_fee .. dialog_end
 		else
 			return gt("aftermarket_upgrades_dialog_top") .. " \\n \\n" .. str_list .. "\\n \\n" .. gt("aftermarket_upgrades_dialog_bottom_for_free") .. dialog_end
 		end
@@ -486,7 +515,7 @@ function exchange_dialog_disagree(first_speaker, second_speaker)
 		return gt("aftermarket_upgrades_dialog_exchange_no_toolkit") .. " " .. clr_off .. gt("aftermarket_upgrades_word_required_1")
 			.. get_name(selected_gun_table["exchange_toolkit"]) .. gt("aftermarket_upgrades_word_required_2")
 	elseif state == 1 then
-		return gt("aftermarket_upgrades_dialog_exchange_no_money") .. " (" .. get_name(selected_gun_table["exchange_cost_total"]) .. ")."
+		return gt("aftermarket_upgrades_dialog_exchange_no_money") .. " (" .. selected_gun_table["exchange_cost_total"] .. " RU)."
 	end
 
 	return gt("aftermarket_upgrades_dialog_exchange_disagree")
@@ -810,11 +839,12 @@ function load_mcm_deals_table()
 	all_deals_log(" ")
 	all_deals_log(" toolkit_required = " 			.. tostring(toolkit_required))
 	all_deals_log(" toolkit_consume = " 			.. tostring(toolkit_consume))
-	all_deals_log(" mechanic_fee = " 				.. tostring(mechanic_fee))
-	all_deals_log(" mechanic_fee_enabled = " 		.. tostring(mechanic_fee_enabled))
+	all_deals_log(" upgrades_return_chance = "		.. tostring(upgrades_return_chance))
 	all_deals_log(" bonus_items_enabled = "			.. tostring(bonus_items_enabled))
 	all_deals_log(" mags_enabled = " 				.. tostring(mags_enabled))
 	all_deals_log(" ")
+	all_deals_log(" mechanic_fee = " 				.. tostring(mechanic_fee))
+	all_deals_log(" mechanic_fee_enabled = " 		.. tostring(mechanic_fee_enabled))
 	all_deals_log(" cost_mode = " 					.. tostring(cost_mode))
 	all_deals_log(" cost_modifier_money = " 		.. tostring(cost_modifier_money))
 	all_deals_log(" cost_modifier_kits = " 			.. tostring(cost_modifier_kits))
@@ -883,11 +913,12 @@ function on_option_change()
 	if ui_mcm then
 		toolkit_required			= get_config("settings/toolkit_required")
 		toolkit_consume				= get_config("settings/toolkit_consume")
-		mechanic_fee				= get_config("settings/mechanic_fee")
-		mechanic_fee_enabled		= get_config("settings/mechanic_fee_enabled")
+		upgrades_return_chance		= get_config("settings/upgrades_return_chance")
 		bonus_items_enabled			= get_config("settings/bonus_items_enabled")
 		mags_enabled				= get_config("settings/mags_enabled")
 
+		mechanic_fee				= get_config("settings/mechanic_fee")
+		mechanic_fee_enabled		= get_config("settings/mechanic_fee_enabled")
 		cost_mode					= get_config("settings/cost_mode")
 		cost_modifier_money			= get_config("settings/cost_modifier_money")
 		cost_modifier_kits			= get_config("settings/cost_modifier_kits")

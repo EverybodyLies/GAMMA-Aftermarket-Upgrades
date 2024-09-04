@@ -5,21 +5,22 @@ deals_table = "ui_mcm_aftermarket_upgrades_deals_warning"
 --------- DEFAULT SETTINGS ---------
 ------------------------------------
 
-VERSION = 2.2
+VERSION = "2.3"
 
 TOOLKIT_REQUIRED			= true
 TOOLKIT_CONSUME				= true
-MECHANIC_FEE				= 8000
-MECHANIC_FEE_ENABLED		= true
+UPGRADES_RETURN_CHANCE		= 80
 MAGS_ENABLED				= true
 BONUS_ITEMS_ENABLED			= true
 
+MECHANIC_FEE				= 8000
+MECHANIC_FEE_ENABLED		= true
 COST_MODE					= 1
 COST_MODIFIER_MONEY			= 1.5
 COST_MODIFIER_KITS			= 1.2
 COST_TYPE_A					= 1.0
-COST_TYPE_B					= 1.5
-COST_TYPE_C					= 2.0
+COST_TYPE_B					= 1.25
+COST_TYPE_C					= 1.75
 COST_TYPE_D					= 2.5
 
 DEBUG_LOG					= false
@@ -43,9 +44,8 @@ t = {id = "aftermarket_upgrades", gr = {
 			{id = "toolkit_required", type = "check", val = 1, def = TOOLKIT_REQUIRED},
 			{id = "toolkit_consume",  type = "check", val = 1, def = TOOLKIT_CONSUME},
 
-			{id = "mechanic_fee_title",   type = "desc", text = "ui_mcm_aftermarket_upgrades_mechanic_fee_title", clr = {200,200,255,200}},
-			{id = "mechanic_fee",         type = "track", val = 2, min = 500, max = 30000, step = 500, def = MECHANIC_FEE},
-			{id = "mechanic_fee_enabled", type = "check", val = 1, def = MECHANIC_FEE_ENABLED},
+			{id = "upgrades_title",   type = "desc", text = "ui_mcm_aftermarket_upgrades_upgrades_title", clr = {200,200,255,200}},
+			{id = "upgrades_return_chance", type = "track", val = 2, min = 0, max = 100, step = 1, def = UPGRADES_RETURN_CHANCE},
 
 			{id = "bonus_items_title",   type = "desc", text = "ui_mcm_aftermarket_upgrades_bonus_items_title", clr = {200,200,255,200}},
 			{id = "bonus_items_enabled", type = "check", val = 1, def = BONUS_ITEMS_ENABLED},
@@ -54,6 +54,10 @@ t = {id = "aftermarket_upgrades", gr = {
 			{id = "mags_enabled", type = "check", val = 1, def = MAGS_ENABLED},
 
 			{id = "line", type = "line"},
+
+			{id = "mechanic_fee_title",   type = "desc", text = "ui_mcm_aftermarket_upgrades_mechanic_fee_title", clr = {200,200,255,200}},
+			{id = "mechanic_fee",         type = "track", val = 2, min = 500, max = 30000, step = 500, def = MECHANIC_FEE},
+			{id = "mechanic_fee_enabled", type = "check", val = 1, def = MECHANIC_FEE_ENABLED},
 
 			{id = "cost_title", type = "desc", text = "ui_mcm_aftermarket_upgrades_cost_title", clr = {200,200,255,200}},
 			{id = "cost_mode",  type = "radio_v", val = 2, def = COST_MODE, content = {{0, "aftermarket_cost_by_modifier"}, {1, "aftermarket_cost_by_repair_type"} }},
